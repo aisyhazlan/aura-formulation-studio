@@ -17,16 +17,16 @@ const ingredients = [
         icon: "🌰",
         cost: 3.00,
         clue: "It deeply moisturizes dry skin, soothes irritation, and improves skin tone and complexion.",
-        role: "Primary carrier Oil"
+        role: "Primary carrier oil"
     },
 
     {
         id: "hibiscus",
-        name: "hibiscus sabdariffa Oil",
+        name: "hibiscus sabdariffa oil",
         icon: "🌺",
         cost: 3.50,
         clue: "It is packed with antioxidants, natural alpha-hydroxy acids (AHAs), and omega-6 fatty acids. It boosts skin elasticity, encourages cellular turnover, and combats signs of aging.",
-        role: "Serves as a premium anti-aging active and brightening agent."
+        role: "Anti-aging agent."
     },
 
     {
@@ -35,7 +35,7 @@ const ingredients = [
         icon: "🌿",
         cost: 2.50,
         clue: "Potent anti-inflammatory, antibacterial, and wound-healing properties. It naturally imparts a beautiful pink-to-red hue to formulations.",
-        role: "Acts as a soothing agent and natural colorant."
+        role: "Natural colorant."
     },
 
     {
@@ -44,7 +44,7 @@ const ingredients = [
         icon: "♻️",
         cost: 1.50,
         clue: "An upcycled ingredient that gives a discarded material a second life. Contains polysaccharides that mimic Hyaluronic Acid.",
-        role: "Upcycled Ingredient. Functions as a powerful hydrating active in water-based formulations."
+        role: "Upcycled Ingredient."
     },
 
     {
@@ -53,7 +53,7 @@ const ingredients = [
         icon: "✨",
         cost: 2.00,
         clue: "A highly stable, oil-soluble antioxidant. It protects skin cells from free radical damage caused by UV rays and pollution while helping the skin retain its natural moisture.",
-        role: "Serves as an anti-aging active and skin protectant."
+        role: "Skin protectant."
     },
 
     {
@@ -62,7 +62,7 @@ const ingredients = [
         icon: "🌹",
         cost: 4.00,
         clue: "A natural astringent to tighten skin tissues, and promotes cell regeneration while offering a deeply relaxing, balancing floral aroma.",
-        role: "Serves as a balancing active and natural fragrance."
+        role: "Natural fragrance."
     },
 
     {
@@ -71,7 +71,7 @@ const ingredients = [
         icon: "🍦",
         cost: 3.00,
         clue: "Sweet, warm scent is known for its therapeutic, stress-relieving properties on the nervous system.",
-        role: "Functions as a fragrance agent and soothing aroma."
+        role: "Fragrance agent."
     },
 
 
@@ -94,7 +94,7 @@ const ingredients = [
         icon: "🌿",
         cost: 4.00,
         clue: "Offers mild antibacterial and antifungal benefits alongside a unique, refreshing green aroma.",
-        role: "Acts as an exotic fragrance agent, widely popular in localized, traditional, or tropical spa-concept body care lines."
+        role: "Natural aromatherapy."
     },
 
     {
@@ -103,7 +103,7 @@ const ingredients = [
         icon: "🌱",
         cost: 2.50,
         clue: "High in menthol, which provides an instant cooling and tingling sensation. It relieves itching, controls excess oil, and stimulates blood flow.",
-        role: "Serves as a cooling and stimulating agent in foot creams, lip plumpers, clarifying shampoos, or cooling muscle balms."
+        role: "Cooling and stimulating agent."
     },
 
     {
