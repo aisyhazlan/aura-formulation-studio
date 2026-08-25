@@ -99,65 +99,156 @@ border-color:#D4AF37;
 background:#FFF8E3;
 }
 
-.ingredients{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:20px;
-margin-top:20px;
+.ingredient{
+
+background:linear-gradient(145deg,#ffffff,#f6f2ff);
+
+border-radius:24px;
+
+padding:20px;
+
+cursor:pointer;
+
+transition:.4s;
+
+position:relative;
+
+min-height:220px;
+
+perspective:1000px;
+
+box-shadow:0 12px 30px rgba(108,74,182,.15);
+
+border:1px solid rgba(212,175,55,.3);
+
 }
 
-.ingredient{
-background:#F9F7FF;
-border-radius:20px;
-padding:20px;
-cursor:pointer;
-transition:.4s;
-position:relative;
-min-height:180px;
-perspective:1000px;
+.ingredient:hover{
+
+transform:translateY(-8px);
+
+box-shadow:0 20px 40px rgba(108,74,182,.25);
+
 }
 
 .inner{
-position:relative;
-width:100%;
-height:100%;
-transition:transform .6s;
-transform-style:preserve-3d;
-}
 
-.ingredient.flipped .inner{
-transform:rotateY(180deg);
+position:relative;
+
+width:100%;
+
+height:180px;
+
+transition:transform .7s;
+
+transform-style:preserve-3d;
+
 }
 
 .front,.back{
+
 position:absolute;
+
 width:100%;
+
+height:100%;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
 backface-visibility:hidden;
+
 }
 
 .back{
+
 transform:rotateY(180deg);
+
+}
+
+.icon{
+
+font-size:50px;
+
+margin-bottom:12px;
+
 }
 
 .beaker{
-width:170px;
-height:170px;
+
+width:200px;
+
+height:200px;
+
 border-radius:50%;
-background:linear-gradient(#7C5BD6,#3B237C);
+
+background:radial-gradient(circle,#9D7CFF,#3B237C);
+
 display:flex;
+
 align-items:center;
+
 justify-content:center;
-font-size:70px;
+
+font-size:80px;
+
 color:white;
-margin:30px auto;
-box-shadow:0 0 30px rgba(108,74,182,.5);
+
+margin:35px auto;
+
+box-shadow:
+
+0 0 30px rgba(157,124,255,.6),
+
+0 0 60px rgba(212,175,55,.35);
+
 animation:float 3s ease-in-out infinite;
+
+position:relative;
+
 }
 
-@keyframes float{
-50%{
-transform:translateY(-8px);
+.beaker::after{
+
+content:"";
+
+position:absolute;
+
+width:220px;
+
+height:220px;
+
+border-radius:50%;
+
+border:2px solid rgba(212,175,55,.4);
+
+animation:pulseRing 2s infinite;
+
 }
+
+@keyframes pulseRing{
+
+0%{
+
+transform:scale(.9);
+
+opacity:1;
+
+}
+
+100%{
+
+transform:scale(1.3);
+
+opacity:0;
+
+}
+
 }
 
 .budget{
