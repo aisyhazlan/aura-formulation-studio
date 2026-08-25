@@ -16,26 +16,26 @@ const ingredients = [
         name: "Sweet Almond Oil",
         icon: "🌰",
         cost: 3.00,
-        clue: "A lightweight botanical carrier oil commonly used in cosmetic formulations.",
-        role: "Carrier Oil"
+        clue: "Rich in essential fatty acids, Vitamin A, and Vitamin E. It deeply moisturizes dry skin, soothes irritation (such as eczema or psoriasis), and improves skin tone and complexion.",
+        role: "Primary carrier Oil"
     },
 
     {
-        id: "hibiscus",
-        name: "Hibiscus Oil",
+        id: "hibiscus sabdariffa",
+        name: "hibiscus sabdariffa Oil",
         icon: "🌺",
         cost: 3.50,
-        clue: "A botanical oil that can contribute to a premium botanical beauty concept.",
-        role: "Botanical Oil"
+        clue: "Often called the "natural botox plant" oil, it is packed with antioxidants, natural alpha-hydroxy acids (AHAs), and omega-6 fatty acids. It boosts skin elasticity, encourages cellular turnover, and combats signs of aging.",
+        role: "Serves as a premium anti-aging active and brightening agent in facial oils, anti-aging serums, and luxury moisturizers."
     },
 
     {
         id: "gromwell",
-        name: "Gromwell Root",
+        name: "Gromwell Root Powder",
         icon: "🌿",
         cost: 2.50,
-        clue: "A botanical root ingredient that supports a plant-based cosmetic concept.",
-        role: "Botanical Ingredient"
+        clue: "Highly revered in traditional herbal skincare for its potent anti-inflammatory, antibacterial, and wound-healing properties. It calms acne, reduces redness, and naturally imparts a beautiful pink-to-red hue to formulations.",
+        role: "Acts as a soothing agent and natural colorant in acne treatments, healing salves, and calming balms."
     },
 
     {
@@ -43,17 +43,17 @@ const ingredients = [
         name: "Tamarind Seed Extract",
         icon: "♻️",
         cost: 1.50,
-        clue: "An upcycled ingredient that gives a discarded material a second life.",
-        role: "Upcycled Ingredient"
+        clue: "An upcycled ingredient that gives a discarded material a second life. Contains polysaccharides that mimic (and some studies suggest, outperform) Hyaluronic Acid. It binds moisture to the skin, plumps out fine lines, and significantly improves skin hydration and texture.",
+        role: "Upcycled Ingredient. Functions as a powerful hydrating active in water-based formulations like serums, toners, and gel moisturizers."
     },
 
     {
         id: "vitaminE",
-        name: "Vitamin E",
+        name: "Vitamin E Acetate",
         icon: "✨",
         cost: 2.00,
-        clue: "An ingredient commonly associated with supporting the stability of oil-based cosmetic formulations.",
-        role: "Antioxidant"
+        clue: "A highly stable, oil-soluble antioxidant. It protects skin cells from free radical damage caused by UV rays and pollution while helping the skin retain its natural moisture.",
+        role: "Serves as an anti-aging active and skin protectant. It also acts as an antioxidant for the formulation, extending the shelf life of the botanical oils by preventing them from going rancid."
     },
 
     {
@@ -61,8 +61,8 @@ const ingredients = [
         name: "Rose Geranium",
         icon: "🌹",
         cost: 4.00,
-        clue: "An aromatic botanical ingredient that contributes to the sensory experience of a formulation.",
-        role: "Essential Oil"
+        clue: "Balances sebum (oil) production, acts as a natural astringent to tighten skin tissues, and promotes cell regeneration while offering a deeply relaxing, balancing floral aroma.",
+        role: "Serves as a balancing active and natural fragrance for oily, dry, or combination skincare products."
     },
 
     {
@@ -70,8 +70,8 @@ const ingredients = [
         name: "Vanilla",
         icon: "🍦",
         cost: 3.00,
-        clue: "A warm aromatic note that can contribute to the sensory identity of a cosmetic product.",
-        role: "Fragrance Note"
+        clue: "Rich in antioxidants that reverse skin damage. Its sweet, warm scent is known for its therapeutic, stress-relieving properties on the nervous system.",
+        role: "Functions as a fragrance agent and soothing aromatic in lip cosmetics, body creams, and spa products."
     },
 
 
@@ -93,17 +93,17 @@ const ingredients = [
         name: "Pandan Essential Oil",
         icon: "🌿",
         cost: 4.00,
-        clue: "An aromatic botanical ingredient that contributes a distinctive tropical sensory experience.",
-        role: "Essential Oil"
+        clue: "Offers mild antibacterial and antifungal benefits alongside a unique, refreshing green aroma.",
+        role: "Acts as an exotic fragrance agent, widely popular in localized, traditional, or tropical spa-concept body care lines."
     },
 
     {
-        id: "mint",
-        name: "Mint",
+        id: "peppermint",
+        name: "Peppermint Essential Oil",
         icon: "🌱",
         cost: 2.50,
-        clue: "A refreshing botanical ingredient suitable for a cooling and revitalising sensory concept.",
-        role: "Botanical Ingredient"
+        clue: "High in menthol, which provides an instant cooling and tingling sensation. It relieves itching, controls excess oil, and stimulates blood flow.",
+        role: "Serves as a cooling and stimulating agent in foot creams, lip plumpers, clarifying shampoos, or cooling muscle balms."
     },
 
     {
@@ -111,7 +111,7 @@ const ingredients = [
         name: "Coffee Grounds",
         icon: "☕",
         cost: 2.00,
-        clue: "A natural particulate ingredient that can support an exfoliating body scrub concept.",
+        clue: "Contains caffeine, which temporarily tightens the skin, reduces puffiness, and stimulates blood circulation (helping to minimize the appearance of cellulite). The physical particles efficiently slough away dead skin cells.",
         role: "Natural Exfoliant"
     }
 
@@ -831,7 +831,7 @@ function removeIngredient(id) {
    1. Coffee Grounds
       → Body Scrub
 
-   2. Pandan + Mint
+   2. Pandan + Peppermint
       → Body Massage Oil
 
    3. Cocoa Butter
@@ -881,13 +881,13 @@ function determineProduct() {
 
     /*
     ========================================================
-    PANDAN + MINT
+    PANDAN + PEPPERMINT
     ========================================================
     */
 
     if (
         hasIngredient("pandan") &&
-        hasIngredient("mint")
+        hasIngredient("peppermint")
     ) {
 
         return {
@@ -895,13 +895,13 @@ function determineProduct() {
             type: "Body Massage Oil",
 
             name:
-                "Aura Pandan Mint Massage Oil",
+                "Aura Pandan Massage Oil",
 
             icon:
                 "🌿",
 
             description:
-                "A refreshing botanical body massage oil concept combining aromatic pandan and mint for a revitalising sensory experience.",
+                "A refreshing botanical body massage oil concept with aromatic pandan for a revitalising sensory experience.",
 
             category:
                 "Body Care",
@@ -1274,7 +1274,7 @@ function generateFormulaResult() {
 
 
         auraMessage =
-            "Excellent combination! Pandan and Mint create a strong aromatic body-care direction.";
+            "Excellent combination! Pandan and Peppermint create a strong aromatic body-care direction.";
 
     }
 
