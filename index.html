@@ -1,1 +1,1765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <title>Aura Formulation Studio</title>
+
+  <style>
+    :root {
+      --cream: #f7f1e8;
+      --cream-dark: #eee4d7;
+      --white: #fffdf9;
+      --lavender: #c8b6d9;
+      --lavender-dark: #9274a8;
+      --pink: #e8c8d0;
+      --brown: #4b3e38;
+      --muted: #7b6d66;
+      --green: #9aaf91;
+      --green-dark: #66835e;
+      --warning: #d6a76e;
+      --danger: #c97d78;
+      --shadow: 0 12px 30px rgba(80, 65, 55, 0.10);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(200,182,217,0.25), transparent 30%),
+        linear-gradient(135deg, var(--cream), #fbf8f3);
+      color: var(--brown);
+    }
+
+    button,
+    input {
+      font-family: inherit;
+    }
+
+    .app {
+      min-height: 100vh;
+      padding: 28px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    /* =========================
+       HEADER
+    ========================== */
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .brand {
+      font-size: 14px;
+      letter-spacing: 1.5px;
+      font-weight: 700;
+      color: var(--lavender-dark);
+    }
+
+    .step-indicator {
+      font-size: 13px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.7);
+      padding: 8px 14px;
+      border-radius: 999px;
+    }
+
+    /* =========================
+       SCREENS
+    ========================== */
+
+    .screen {
+      display: none;
+    }
+
+    .screen.active {
+      display: block;
+      animation: fadeIn 0.45s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* =========================
+       HERO
+    ========================== */
+
+    .hero {
+      min-height: 650px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 30px;
+      align-items: center;
+      background: rgba(255,255,255,0.65);
+      border: 1px solid rgba(255,255,255,0.8);
+      border-radius: 32px;
+      padding: 60px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero h1 {
+      margin: 0 0 18px;
+      font-size: clamp(42px, 6vw, 76px);
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+
+    .hero .subtitle {
+      color: var(--lavender-dark);
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 18px;
+    }
+
+    .hero p {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .mission-box {
+      margin: 28px 0;
+      background: var(--cream);
+      padding: 20px;
+      border-radius: 18px;
+      border-left: 5px solid var(--lavender);
+    }
+
+    .mission-box strong {
+      display: block;
+      margin-bottom: 7px;
+    }
+
+    .mascot-card {
+      min-height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(145deg, #f8ede9, #eee8f3);
+      border-radius: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mascot-card::before {
+      content: "";
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: rgba(200,182,217,0.28);
+      filter: blur(5px);
+    }
+
+    .mascot-placeholder {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 25px;
+    }
+
+    .mascot-icon {
+      font-size: 110px;
+      margin-bottom: 15px;
+    }
+
+    .mascot-placeholder h3 {
+      margin: 0 0 7px;
+      font-size: 24px;
+    }
+
+    .mascot-placeholder p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* =========================
+       BUTTONS
+    ========================== */
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 14px 24px;
+      font-weight: 700;
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: var(--lavender-dark);
+      color: white;
+      box-shadow: 0 8px 20px rgba(146,116,168,0.25);
+    }
+
+    .btn-secondary {
+      background: var(--cream-dark);
+      color: var(--brown);
+    }
+
+    .btn-green {
+      background: var(--green-dark);
+      color: white;
+    }
+
+    .btn-danger {
+      background: #f2d8d5;
+      color: #8e4f4b;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    /* =========================
+       SECTION
+    ========================== */
+
+    .section-title {
+      margin-bottom: 8px;
+      font-size: 34px;
+    }
+
+    .section-description {
+      color: var(--muted);
+      margin-top: 0;
+      margin-bottom: 28px;
+      line-height: 1.7;
+    }
+
+    /* =========================
+       INGREDIENTS
+    ========================== */
+
+    .ingredient-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .ingredient-card {
+      background: rgba(255,255,255,0.84);
+      border: 2px solid transparent;
+      border-radius: var(--radius);
+      padding: 20px;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: all 0.25s ease;
+      min-height: 180px;
+    }
+
+    .ingredient-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .ingredient-card.selected {
+      border-color: var(--lavender-dark);
+      background: #f7f1fa;
+    }
+
+    .ingredient-icon {
+      font-size: 38px;
+      margin-bottom: 10px;
+    }
+
+    .ingredient-card h3 {
+      margin: 0 0 6px;
+      font-size: 17px;
+    }
+
+    .ingredient-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .selected-label {
+      display: none;
+      margin-top: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--lavender-dark);
+    }
+
+    .ingredient-card.selected .selected-label {
+      display: block;
+    }
+
+    /* =========================
+       FORMULATION
+    ========================== */
+
+    .lab-layout {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .panel {
+      background: rgba(255,255,255,0.84);
+      padding: 26px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .formula-row {
+      display: grid;
+      grid-template-columns: 1.7fr 0.8fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--cream-dark);
+    }
+
+    .formula-name {
+      font-weight: 600;
+    }
+
+    .formula-type {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 3px;
+    }
+
+    .formula-input {
+      width: 100%;
+      border: 1px solid #ddd3c9;
+      border-radius: 12px;
+      padding: 11px 12px;
+      background: #fffefa;
+      outline: none;
+    }
+
+    .formula-input:focus {
+      border-color: var(--lavender-dark);
+      box-shadow: 0 0 0 3px rgba(146,116,168,0.08);
+    }
+
+    .unit {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .status-card {
+      position: sticky;
+      top: 20px;
+    }
+
+    .status-title {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .status-number {
+      font-size: 42px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+
+    .status-label {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .meter {
+      height: 10px;
+      background: #eee7df;
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 10px 0 18px;
+    }
+
+    .meter-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--lavender), var(--lavender-dark));
+      transition: width 0.35s ease;
+    }
+
+    .status-item {
+      margin-bottom: 18px;
+    }
+
+    .status-item strong {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+    }
+
+    /* =========================
+       FEEDBACK
+    ========================== */
+
+    .feedback {
+      display: none;
+      margin-top: 22px;
+      padding: 20px;
+      border-radius: 18px;
+    }
+
+    .feedback.show {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .feedback.good {
+      background: #edf5ea;
+      border: 1px solid #cbdcc4;
+    }
+
+    .feedback.warning {
+      background: #fbf2e4;
+      border: 1px solid #ecd7b8;
+    }
+
+    .feedback.bad {
+      background: #fae9e7;
+      border: 1px solid #e7c2bd;
+    }
+
+    .feedback h3 {
+      margin-top: 0;
+    }
+
+    /* =========================
+       AURA STUDY BUDDY
+    ========================== */
+
+    .aura-box {
+      margin-top: 22px;
+      background: linear-gradient(135deg, #f6eef9, #fffaf5);
+      border-radius: 20px;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 16px;
+      align-items: center;
+      border: 1px solid #eadff0;
+    }
+
+    .aura-avatar {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #e8d8f0;
+      font-size: 34px;
+    }
+
+    .aura-box h4 {
+      margin: 0 0 5px;
+    }
+
+    .aura-box p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* =========================
+       RESULT
+    ========================== */
+
+    .result-card {
+      background: linear-gradient(135deg, #fffdf9, #f7effa);
+      border-radius: 30px;
+      padding: 40px;
+      box-shadow: var(--shadow);
+    }
+
+    .result-header {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .result-header .check {
+      font-size: 62px;
+    }
+
+    .result-header h2 {
+      margin: 10px 0 8px;
+      font-size: 40px;
+    }
+
+    .result-header p {
+      color: var(--muted);
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .result-stat {
+      background: rgba(255,255,255,0.7);
+      padding: 20px;
+      border-radius: 18px;
+      text-align: center;
+    }
+
+    .result-stat strong {
+      display: block;
+      font-size: 28px;
+      margin-bottom: 4px;
+    }
+
+    .result-stat span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .formula-summary {
+      background: white;
+      padding: 24px;
+      border-radius: 20px;
+    }
+
+    .formula-summary h3 {
+      margin-top: 0;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee6dd;
+      font-size: 14px;
+    }
+
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 36px 24px;
+      }
+
+      .ingredient-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .lab-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .status-card {
+        position: static;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .app {
+        padding: 14px;
+      }
+
+      .hero h1 {
+        font-size: 46px;
+      }
+
+      .ingredient-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .result-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .formula-row {
+        grid-template-columns: 1fr;
+      }
+
+      .unit {
+        margin-top: -5px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+  <div class="container">
+
+    <div class="topbar">
+      <div class="brand">AURA LUXE AI LAB</div>
+      <div class="step-indicator" id="stepIndicator">Welcome</div>
+    </div>
+
+    <!-- =========================
+         SCREEN 1
+    ========================== -->
+
+    <section class="screen active" id="screen1">
+
+      <div class="hero">
+
+        <div>
+          <div class="brand">DIGITAL FORMULATION EXPERIENCE</div>
+
+          <h1>
+            Aura<br>
+            Formulation Studio
+          </h1>
+
+          <div class="subtitle">
+            Create • Experiment • Formulate
+          </div>
+
+          <p>
+            Welcome to your virtual cosmetic laboratory.
+            Explore ingredients, build a botanical nail-care
+            formulation and learn how your choices influence
+            the formulation process.
+          </p>
+
+          <div class="mission-box">
+            <strong>🧪 YOUR MISSION</strong>
+            Create a virtual botanical nail and cuticle oil
+            formulation inspired by Aura Tama Nail Oil.
+            Your learning target is a <strong>20 mL batch</strong>.
+          </div>
+
+          <button class="btn btn-primary" onclick="startFormulation()">
+            START FORMULATING ✨
+          </button>
+        </div>
+
+        <div class="mascot-card">
+          <div class="mascot-placeholder">
+
+            <!--
+              NANTI AWAK BOLEH GANTIKAN EMOJI INI
+              DENGAN GAMBAR AURA STUDY BUDDY
+            -->
+
+            <div class="mascot-icon">🧑🏻‍🔬</div>
+
+            <h3>Aura Study Buddy</h3>
+
+            <p>
+              Your AI-inspired cosmetic learning companion
+            </p>
+
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         SCREEN 2
+    ========================== -->
+
+    <section class="screen" id="screen2">
+
+      <h2 class="section-title">
+        Step 1 — Choose Your Ingredients
+      </h2>
+
+      <p class="section-description">
+        Explore the ingredients and select the components
+        you would like to include in your virtual formulation.
+      </p>
+
+      <div class="ingredient-grid" id="ingredientGrid"></div>
+
+      <div class="button-row">
+        <button class="btn btn-secondary" onclick="goToScreen(1)">
+          ← Back
+        </button>
+
+        <button class="btn btn-primary" onclick="continueToFormula()">
+          CONTINUE →
+        </button>
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         SCREEN 3
+    ========================== -->
+
+    <section class="screen" id="screen3">
+
+      <h2 class="section-title">
+        Step 2 — Build Your Formula
+      </h2>
+
+      <p class="section-description">
+        Enter quantities for your selected ingredients.
+        This is a learning simulation — review your choices
+        before testing the formulation.
+      </p>
+
+      <div class="lab-layout">
+
+        <div class="panel">
+
+          <div id="formulaRows"></div>
+
+          <div class="button-row">
+            <button class="btn btn-secondary" onclick="goToScreen(2)">
+              ← Back
+            </button>
+
+            <button class="btn btn-primary" onclick="checkFormula()">
+              🔍 CHECK MY FORMULA
+            </button>
+          </div>
+
+          <div id="feedbackBox" class="feedback"></div>
+
+          <div class="aura-box">
+
+            <div class="aura-avatar">
+              🤖
+            </div>
+
+            <div>
+              <h4>Aura Study Buddy</h4>
+
+              <p id="auraMessage">
+                Select your ingredients and build your formula.
+                I'll help you think through your choices.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- STATUS PANEL -->
+
+        <div class="panel status-card">
+
+          <div class="status-title">
+            Formulation Status
+          </div>
+
+          <div class="status-item">
+
+            <strong>
+              <span>Batch Target</span>
+              <span>20 mL</span>
+            </strong>
+
+            <div class="meter">
+              <div
+                class="meter-fill"
+                id="batchMeter">
+              </div>
+            </div>
+
+            <div class="status-label">
+              Current total:
+              <strong id="totalDisplay">0</strong>
+            </div>
+
+          </div>
+
+
+          <div class="status-item">
+
+            <strong>
+              <span>Ingredients Selected</span>
+              <span id="ingredientCount">0</span>
+            </strong>
+
+            <div class="meter">
+              <div
+                class="meter-fill"
+                id="ingredientMeter">
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="status-item">
+
+            <strong>
+              <span>Upcycled Ingredient</span>
+              <span id="upcycledStatus">—</span>
+            </strong>
+
+          </div>
+
+
+          <div class="status-item">
+
+            <strong>
+              <span>Sustainability Score</span>
+              <span id="sustainabilityScore">0</span>
+            </strong>
+
+            <div class="meter">
+              <div
+                class="meter-fill"
+                id="sustainabilityMeter">
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         SCREEN 4
+    ========================== -->
+
+    <section class="screen" id="screen4">
+
+      <div class="result-card">
+
+        <div class="result-header">
+
+          <div class="check">
+            ✨
+          </div>
+
+          <h2>
+            Your Formula Is Ready
+          </h2>
+
+          <p>
+            You have completed the Aura Formulation Studio
+            learning simulation.
+          </p>
+
+        </div>
+
+
+        <div class="result-grid">
+
+          <div class="result-stat">
+            <strong id="finalIngredients">0</strong>
+            <span>Ingredients Selected</span>
+          </div>
+
+          <div class="result-stat">
+            <strong id="finalBatch">0</strong>
+            <span>Current Batch</span>
+          </div>
+
+          <div class="result-stat">
+            <strong id="finalSustainability">0</strong>
+            <span>Sustainability Learning Score</span>
+          </div>
+
+        </div>
+
+
+        <div class="formula-summary">
+
+          <h3>
+            🧪 Your Formula
+          </h3>
+
+          <div id="finalFormulaList"></div>
+
+        </div>
+
+
+        <div class="aura-box">
+
+          <div class="aura-avatar">
+            🤖
+          </div>
+
+          <div>
+
+            <h4>
+              Aura Study Buddy says:
+            </h4>
+
+            <p id="finalAuraMessage">
+              Great work exploring your formulation!
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="button-row">
+
+          <button
+            class="btn btn-green"
+            onclick="showHandsOnMessage()">
+            🧪 READY FOR THE REAL LAB
+          </button>
+
+          <button
+            class="btn btn-secondary"
+            onclick="resetStudio()">
+            ↻ TRY AGAIN
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+</div>
+
+
+<script>
+
+  /* =========================================================
+     INGREDIENT DATA
+  ========================================================= */
+
+  const ingredients = [
+    {
+      id: "cocoa",
+      name: "Unrefined Cocoa Butter",
+      type: "Butter",
+      icon: "🧈",
+      upcycled: false
+    },
+    {
+      id: "almond",
+      name: "Sweet Almond Oil",
+      type: "Carrier Oil",
+      icon: "🌰",
+      upcycled: false
+    },
+    {
+      id: "hibiscus",
+      name: "Hibiscus Oil",
+      type: "Botanical Oil",
+      icon: "🌺",
+      upcycled: false
+    },
+    {
+      id: "gromwell",
+      name: "Gromwell Root Powder",
+      type: "Botanical Ingredient",
+      icon: "🌿",
+      upcycled: false
+    },
+    {
+      id: "tamarind",
+      name: "Upcycled Tamarind Seed Extract Powder",
+      type: "Upcycled Ingredient",
+      icon: "♻️",
+      upcycled: true
+    },
+    {
+      id: "vitaminE",
+      name: "Vitamin E Acetate",
+      type: "Supporting Ingredient",
+      icon: "✨",
+      upcycled: false
+    },
+    {
+      id: "geranium",
+      name: "Rose Geranium Essential Oil",
+      type: "Essential Oil",
+      icon: "🌹",
+      upcycled: false
+    },
+    {
+      id: "vanilla",
+      name: "Vanilla Essential Oil",
+      type: "Essential Oil",
+      icon: "🍦",
+      upcycled: false
+    }
+  ];
+
+
+  /* =========================================================
+     STATE
+  ========================================================= */
+
+  let selectedIngredients = [];
+
+  let quantities = {};
+
+
+  /* =========================================================
+     START
+  ========================================================= */
+
+  function startFormulation() {
+
+    selectedIngredients = [];
+
+    quantities = {};
+
+    renderIngredientCards();
+
+    goToScreen(2);
+  }
+
+
+  /* =========================================================
+     SCREEN CONTROL
+  ========================================================= */
+
+  function goToScreen(number) {
+
+    document
+      .querySelectorAll(".screen")
+      .forEach(screen => {
+        screen.classList.remove("active");
+      });
+
+    document
+      .getElementById("screen" + number)
+      .classList.add("active");
+
+    const labels = {
+      1: "Welcome",
+      2: "Ingredient Selection",
+      3: "Build Formula",
+      4: "Formula Complete"
+    };
+
+    document.getElementById("stepIndicator").textContent =
+      labels[number];
+  }
+
+
+  /* =========================================================
+     INGREDIENT CARDS
+  ========================================================= */
+
+  function renderIngredientCards() {
+
+    const grid =
+      document.getElementById("ingredientGrid");
+
+    grid.innerHTML = "";
+
+    ingredients.forEach(ingredient => {
+
+      const isSelected =
+        selectedIngredients.includes(ingredient.id);
+
+      const card =
+        document.createElement("div");
+
+      card.className =
+        "ingredient-card" +
+        (isSelected ? " selected" : "");
+
+      card.onclick = () =>
+        toggleIngredient(ingredient.id);
+
+      card.innerHTML = `
+        <div class="ingredient-icon">
+          ${ingredient.icon}
+        </div>
+
+        <h3>
+          ${ingredient.name}
+        </h3>
+
+        <p>
+          ${ingredient.type}
+        </p>
+
+        <div class="selected-label">
+          ✓ SELECTED
+        </div>
+      `;
+
+      grid.appendChild(card);
+    });
+  }
+
+
+  /* =========================================================
+     SELECT / DESELECT
+  ========================================================= */
+
+  function toggleIngredient(id) {
+
+    if (selectedIngredients.includes(id)) {
+
+      selectedIngredients =
+        selectedIngredients.filter(
+          item => item !== id
+        );
+
+      delete quantities[id];
+
+    } else {
+
+      selectedIngredients.push(id);
+
+      quantities[id] = 0;
+    }
+
+    renderIngredientCards();
+  }
+
+
+  /* =========================================================
+     MOVE TO FORMULA
+  ========================================================= */
+
+  function continueToFormula() {
+
+    if (selectedIngredients.length === 0) {
+
+      alert(
+        "Please select at least one ingredient before continuing."
+      );
+
+      return;
+    }
+
+    renderFormulaRows();
+
+    goToScreen(3);
+
+    updateStatus();
+  }
+
+
+  /* =========================================================
+     FORMULA ROWS
+  ========================================================= */
+
+  function renderFormulaRows() {
+
+    const container =
+      document.getElementById("formulaRows");
+
+    container.innerHTML = "";
+
+    selectedIngredients.forEach(id => {
+
+      const ingredient =
+        ingredients.find(
+          item => item.id === id
+        );
+
+      const row =
+        document.createElement("div");
+
+      row.className = "formula-row";
+
+      row.innerHTML = `
+
+        <div>
+          <div class="formula-name">
+            ${ingredient.icon}
+            ${ingredient.name}
+          </div>
+
+          <span class="formula-type">
+            ${ingredient.type}
+          </span>
+        </div>
+
+        <input
+          type="number"
+          min="0"
+          step="0.1"
+          class="formula-input"
+          value="${quantities[id] || ""}"
+          placeholder="Quantity"
+          oninput="updateQuantity('${id}', this.value)"
+        />
+
+        <div class="unit">
+          g / mL
+        </div>
+
+      `;
+
+      container.appendChild(row);
+    });
+  }
+
+
+  /* =========================================================
+     UPDATE QUANTITY
+  ========================================================= */
+
+  function updateQuantity(id, value) {
+
+    let number =
+      parseFloat(value);
+
+    if (isNaN(number)) {
+      number = 0;
+    }
+
+    quantities[id] = number;
+
+    updateStatus();
+  }
+
+
+  /* =========================================================
+     CALCULATE TOTAL
+  ========================================================= */
+
+  function calculateTotal() {
+
+    return Object.values(quantities)
+      .reduce(
+        (sum, value) =>
+          sum + Number(value || 0),
+        0
+      );
+  }
+
+
+  /* =========================================================
+     SUSTAINABILITY SCORE
+  ========================================================= */
+
+  function calculateSustainability() {
+
+    let score = 0;
+
+    // Base score for thinking about sustainability
+    if (selectedIngredients.length > 0) {
+      score += 20;
+    }
+
+    // Ingredient diversity
+    if (selectedIngredients.length >= 3) {
+      score += 20;
+    }
+
+    if (selectedIngredients.length >= 5) {
+      score += 10;
+    }
+
+    // Upcycled ingredient
+    const hasUpcycled =
+      selectedIngredients.some(id => {
+
+        const item =
+          ingredients.find(
+            ingredient =>
+              ingredient.id === id
+          );
+
+        return item && item.upcycled;
+      });
+
+    if (hasUpcycled) {
+      score += 50;
+    }
+
+    return Math.min(score, 100);
+  }
+
+
+  /* =========================================================
+     UPDATE STATUS
+  ========================================================= */
+
+  function updateStatus() {
+
+    const total =
+      calculateTotal();
+
+    const ingredientCount =
+      selectedIngredients.length;
+
+    const sustainability =
+      calculateSustainability();
+
+    document.getElementById(
+      "totalDisplay"
+    ).textContent =
+      total.toFixed(1);
+
+    document.getElementById(
+      "ingredientCount"
+    ).textContent =
+      ingredientCount;
+
+    document.getElementById(
+      "sustainabilityScore"
+    ).textContent =
+      sustainability;
+
+    document.getElementById(
+      "batchMeter"
+    ).style.width =
+      Math.min(
+        (total / 20) * 100,
+        100
+      ) + "%";
+
+    document.getElementById(
+      "ingredientMeter"
+    ).style.width =
+      Math.min(
+        (ingredientCount / 8) * 100,
+        100
+      ) + "%";
+
+    document.getElementById(
+      "sustainabilityMeter"
+    ).style.width =
+      sustainability + "%";
+
+    const hasUpcycled =
+      selectedIngredients.some(id => {
+
+        const item =
+          ingredients.find(
+            ingredient =>
+              ingredient.id === id
+          );
+
+        return item && item.upcycled;
+      });
+
+    document.getElementById(
+      "upcycledStatus"
+    ).textContent =
+      hasUpcycled
+        ? "✓ Included"
+        : "Not included";
+  }
+
+
+  /* =========================================================
+     CHECK FORMULA
+  ========================================================= */
+
+  function checkFormula() {
+
+    const total =
+      calculateTotal();
+
+    const sustainability =
+      calculateSustainability();
+
+    const hasUpcycled =
+      selectedIngredients.some(id => {
+
+        const item =
+          ingredients.find(
+            ingredient =>
+              ingredient.id === id
+          );
+
+        return item && item.upcycled;
+      });
+
+    const feedback =
+      document.getElementById(
+        "feedbackBox"
+      );
+
+    let message = "";
+    let className = "";
+
+    if (total === 0) {
+
+      className = "bad";
+
+      message = `
+        <h3>⚠️ Nothing has been entered yet</h3>
+
+        <p>
+          Add quantities to your selected ingredients
+          before checking the formulation.
+        </p>
+      `;
+
+    } else if (total < 20) {
+
+      className = "warning";
+
+      message = `
+        <h3>⚠️ Almost there!</h3>
+
+        <p>
+          Your current batch is ${total.toFixed(1)}
+          and the learning target is 20 mL.
+          Review your ingredient quantities and try again.
+        </p>
+      `;
+
+    } else if (total > 20) {
+
+      className = "warning";
+
+      message = `
+        <h3>⚠️ Review your batch size</h3>
+
+        <p>
+          Your current batch is ${total.toFixed(1)}.
+          The learning target is 20 mL.
+          Consider adjusting your quantities.
+        </p>
+      `;
+
+    } else {
+
+      className = "good";
+
+      message = `
+        <h3>✨ Target batch reached!</h3>
+
+        <p>
+          Your current formulation reaches the
+          20 mL learning target.
+        </p>
+
+        ${
+          hasUpcycled
+          ? `
+            <p>
+              ♻️ Great! You also included an
+              upcycled ingredient.
+            </p>
+          `
+          : `
+            <p>
+              💡 Consider exploring an upcycled
+              ingredient to strengthen the
+              sustainability aspect of your formulation.
+            </p>
+          `
+        }
+      `;
+    }
+
+    feedback.className =
+      "feedback show " + className;
+
+    feedback.innerHTML =
+      message;
+
+
+    updateAuraMessage(
+      total,
+      hasUpcycled,
+      sustainability
+    );
+  }
+
+
+  /* =========================================================
+     AURA STUDY BUDDY
+  ========================================================= */
+
+  function updateAuraMessage(
+    total,
+    hasUpcycled,
+    sustainability
+  ) {
+
+    const aura =
+      document.getElementById(
+        "auraMessage"
+      );
+
+    if (total === 0) {
+
+      aura.textContent =
+        "Start by choosing your ingredients and entering quantities.";
+
+    } else if (!hasUpcycled) {
+
+      aura.textContent =
+        "I noticed that your formulation does not include our upcycled tamarind seed ingredient. What sustainability goal could you achieve by exploring it?";
+
+    } else if (total < 20) {
+
+      aura.textContent =
+        "Great ingredient selection! Your next step is to review the total batch size.";
+
+    } else if (total > 20) {
+
+      aura.textContent =
+        "Your formulation is above the 20 mL learning target. Review your quantities and try adjusting the formula.";
+
+    } else if (sustainability >= 80) {
+
+      aura.textContent =
+        "Excellent! You reached the target batch size and demonstrated strong sustainability awareness.";
+
+    } else {
+
+      aura.textContent =
+        "Nice work! Explore your ingredient choices and think about how each component contributes to the formulation.";
+    }
+  }
+
+
+  /* =========================================================
+     FINAL RESULT
+  ========================================================= */
+
+  function showFinalResult() {
+
+    const total =
+      calculateTotal();
+
+    const sustainability =
+      calculateSustainability();
+
+    document.getElementById(
+      "finalIngredients"
+    ).textContent =
+      selectedIngredients.length;
+
+    document.getElementById(
+      "finalBatch"
+    ).textContent =
+      total.toFixed(1) + " mL";
+
+    document.getElementById(
+      "finalSustainability"
+    ).textContent =
+      sustainability;
+
+
+    const list =
+      document.getElementById(
+        "finalFormulaList"
+      );
+
+    list.innerHTML = "";
+
+    selectedIngredients.forEach(id => {
+
+      const ingredient =
+        ingredients.find(
+          item =>
+            item.id === id
+        );
+
+      const row =
+        document.createElement("div");
+
+      row.className =
+        "summary-row";
+
+      row.innerHTML = `
+        <span>
+          ${ingredient.icon}
+          ${ingredient.name}
+        </span>
+
+        <strong>
+          ${Number(quantities[id] || 0).toFixed(1)}
+        </strong>
+      `;
+
+      list.appendChild(row);
+    });
+
+
+    let finalMessage =
+      "You completed the formulation learning simulation.";
+
+    if (sustainability >= 80) {
+
+      finalMessage =
+        "Excellent! You demonstrated strong ingredient exploration and sustainability awareness. Now think about how you would apply this knowledge in the real laboratory.";
+
+    } else if (sustainability >= 50) {
+
+      finalMessage =
+        "Good progress! Explore the Ingredient Lab again and think about how ingredient selection connects with sustainability.";
+
+    } else {
+
+      finalMessage =
+        "Keep exploring! Visit the Ingredient Lab and ask Aura Study Buddy about the role of each ingredient before trying again.";
+    }
+
+    document.getElementById(
+      "finalAuraMessage"
+    ).textContent =
+      finalMessage;
+
+    goToScreen(4);
+  }
+
+
+  /* =========================================================
+     SHOW HANDS-ON MESSAGE
+  ========================================================= */
+
+  function showHandsOnMessage() {
+
+    alert(
+      "🧪 READY FOR THE REAL LAB!\n\n" +
+      "Apply what you learned in this virtual activity " +
+      "during your hands-on formulation session."
+    );
+  }
+
+
+  /* =========================================================
+     RESET
+  ========================================================= */
+
+  function resetStudio() {
+
+    selectedIngredients = [];
+
+    quantities = {};
+
+    document.getElementById(
+      "feedbackBox"
+    ).className =
+      "feedback";
+
+    document.getElementById(
+      "feedbackBox"
+    ).innerHTML = "";
+
+    renderIngredientCards();
+
+    goToScreen(1);
+  }
+
+
+  /* =========================================================
+     EXTRA BUTTON BEHAVIOUR
+  ========================================================= */
+
+  document.addEventListener(
+    "click",
+    function(event) {
+
+      if (
+        event.target &&
+        event.target.textContent &&
+        event.target.textContent.includes(
+          "CHECK MY FORMULA"
+        )
+      ) {
+
+        setTimeout(() => {
+
+          const feedback =
+            document.getElementById(
+              "feedbackBox"
+            );
+
+          if (
+            feedback.classList.contains(
+              "good"
+            )
+          ) {
+
+            const buttons =
+              document.querySelectorAll(
+                "#screen3 .button-row .btn"
+              );
+
+            // Add final result button only once
+            if (
+              !document.getElementById(
+                "finalButton"
+              )
+            ) {
+
+              const button =
+                document.createElement(
+                  "button"
+                );
+
+              button.id =
+                "finalButton";
+
+              button.className =
+                "btn btn-green";
+
+              button.textContent =
+                "VIEW MY FORMULA ✨";
+
+              button.onclick =
+                showFinalResult;
+
+              event.target.parentElement
+                .appendChild(button);
+            }
+          }
+
+        }, 50);
+      }
+
+    }
+  );
+
+
+  /* =========================================================
+     INITIAL LOAD
+  ========================================================== */
+
+  renderIngredientCards();
+
+</script>
+
+</body>
+</html>
