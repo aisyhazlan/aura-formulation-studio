@@ -1,1245 +1,836 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+/* =========================================
+   AURA FORMULATION QUEST
+   MISSION 01
+========================================= */
+
+
+/* =========================================
+   INGREDIENT DATABASE
+========================================= */
+
+const ingredients = [
+
+    {
+        id: "almond",
+        name: "Sweet Almond Oil",
+        icon: "🌰",
+        cost: 3.00,
+        clue: "I am a lightweight botanical oil commonly used as a carrier oil.",
+        role: "Carrier Oil"
+    },
+
+    {
+        id: "hibiscus",
+        name: "Hibiscus Oil",
+        icon: "🌺",
+        cost: 3.50,
+        clue: "I bring a botanical character to a premium nail-care concept.",
+        role: "Botanical Oil"
+    },
+
+    {
+        id: "gromwell",
+        name: "Gromwell Root",
+        icon: "🌿",
+        cost: 2.50,
+        clue: "I come from a botanical root and can contribute to a plant-based beauty concept.",
+        role: "Botanical Ingredient"
+    },
 
-:root {
-    --purple-dark: #171026;
-    --purple: #33205f;
-    --purple-light: #7554ad;
-    --gold: #c9a64b;
-    --gold-light: #f0d58a;
-    --cream: #faf8f3;
-    --white: #ffffff;
-    --text: #292332;
-    --muted: #77717f;
-    --border: #e8e2ed;
-    --green: #5c896a;
-}
+    {
+        id: "tamarind",
+        name: "Tamarind Seed Extract",
+        icon: "♻",
+        cost: 1.50,
+        clue: "I give a discarded material a second life through upcycling.",
+        role: "Upcycled Ingredient"
+    },
 
-html {
-    scroll-behavior: smooth;
-}
+    {
+        id: "vitaminE",
+        name: "Vitamin E",
+        icon: "✨",
+        cost: 2.00,
+        clue: "I am commonly associated with supporting the stability of oil-based cosmetic formulations.",
+        role: "Antioxidant"
+    },
 
-body {
-    font-family: "DM Sans", sans-serif;
-    background: var(--cream);
-    color: var(--text);
-    line-height: 1.6;
-}
+    {
+        id: "geranium",
+        name: "Rose Geranium",
+        icon: "🌹",
+        cost: 4.00,
+        clue: "I contribute to the sensory and aromatic experience of a formulation.",
+        role: "Essential Oil"
+    },
 
-button {
-    font-family: inherit;
-}
+    {
+        id: "vanilla",
+        name: "Vanilla",
+        icon: "🍦",
+        cost: 3.00,
+        clue: "I contribute a warm and comforting aromatic character.",
+        role: "Fragrance Note"
+    }
 
-.hidden {
-    display: none !important;
-}
+];
 
 
-/* =========================
-   LANDING
-========================= */
-
-.landing {
-    min-height: 100vh;
-    background:
-        radial-gradient(circle at 50% 35%, #503485 0%, transparent 28%),
-        linear-gradient(135deg, #120c20, #24153f 55%, #100b19);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    overflow: hidden;
-    position: relative;
-}
+/* =========================================
+   VARIABLES
+========================================= */
 
-.landing::before,
-.landing::after {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
-    border: 1px solid rgba(240, 213, 138, 0.2);
-}
+let selectedIngredients = [];
 
-.landing::before {
-    width: 600px;
-    height: 600px;
-}
+let selectedClient = "";
 
-.landing::after {
-    width: 900px;
-    height: 900px;
-}
+const budget = 20;
 
-.landing-content {
-    position: relative;
-    z-index: 2;
-    max-width: 800px;
-    padding: 40px 25px;
-}
 
-.aura-orb {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 25px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 42px;
-    color: var(--gold-light);
-    background: radial-gradient(circle, #7554ad, #33205f);
-    border: 1px solid rgba(240, 213, 138, 0.6);
-    box-shadow:
-        0 0 40px rgba(117, 84, 173, 0.7),
-        0 0 80px rgba(201, 166, 75, 0.15);
-    animation: floating 4s ease-in-out infinite;
-}
+/* =========================================
+   PAGE ELEMENTS
+========================================= */
 
-.eyebrow,
-.section-label {
-    letter-spacing: 0.18em;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--gold);
-}
+const ingredientContainer =
+    document.getElementById("ingredients");
 
-.landing h1 {
-    font-family: "Playfair Display", serif;
-    font-size: clamp(48px, 8vw, 90px);
-    line-height: 0.95;
-    margin: 15px 0 25px;
-}
+const selectedList =
+    document.getElementById("selectedList");
 
-.landing h1 span {
-    color: var(--gold-light);
-}
+const budgetText =
+    document.getElementById("budgetText");
 
-.landing-subtitle {
-    font-size: 17px;
-    color: #d8d0e3;
-    margin-bottom: 35px;
-}
+const budgetFill =
+    document.getElementById("fill");
 
-.primary-button {
-    border: none;
-    background: linear-gradient(135deg, var(--gold-light), var(--gold));
-    color: #24172f;
-    padding: 16px 28px;
-    border-radius: 100px;
-    font-weight: 700;
-    font-size: 14px;
-    cursor: pointer;
-    transition: 0.3s ease;
-    box-shadow: 0 12px 30px rgba(201, 166, 75, 0.2);
-}
+const budgetMessage =
+    document.getElementById("budgetMessage");
 
-.primary-button span {
-    margin-left: 12px;
-}
+const ingredientCount =
+    document.getElementById("ingredientCount");
 
-.primary-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 16px 35px rgba(201, 166, 75, 0.35);
-}
+const missionProgress =
+    document.getElementById("missionProgress");
 
-.landing-note {
-    margin-top: 20px;
-    color: #8d829b;
-    font-size: 12px;
-}
+const progressText =
+    document.getElementById("progressText");
 
 
-/* =========================
-   TOP BAR
-========================= */
-
-.topbar {
-    height: 78px;
-    background: rgba(255, 255, 255, 0.96);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 6%;
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    backdrop-filter: blur(15px);
-}
+/* =========================================
+   CREATE INGREDIENT CARDS
+========================================= */
 
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
+function createIngredientCards() {
 
-.brand-symbol {
-    width: 38px;
-    height: 38px;
-    border-radius: 12px;
-    background: var(--purple);
-    color: var(--gold-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: "Playfair Display", serif;
-    font-size: 21px;
-}
+    ingredientContainer.innerHTML = "";
 
-.brand strong {
-    display: block;
-    font-size: 12px;
-    letter-spacing: 0.12em;
-}
+    ingredients.forEach((ingredient, index) => {
 
-.brand small {
-    display: block;
-    font-size: 9px;
-    color: var(--muted);
-    letter-spacing: 0.2em;
-}
+        const card = document.createElement("div");
 
-.mission-progress {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-}
+        card.className = "ingredient";
 
-.progress-track {
-    width: 150px;
-    height: 5px;
-    background: #ebe6ee;
-    border-radius: 20px;
-    overflow: hidden;
-}
+        card.dataset.id = ingredient.id;
 
-#missionProgress {
-    width: 0%;
-    height: 100%;
-    background: linear-gradient(90deg, var(--purple-light), var(--gold));
-    transition: 0.6s ease;
-}
+        card.innerHTML = `
 
+            <div class="ingredient-inner">
 
-/* =========================
-   MAIN
-========================= */
+                <div class="ingredient-front">
 
-.page-container {
-    max-width: 1150px;
-    margin: auto;
-}
+                    <div class="ingredient-icon">
+                        ${ingredient.icon}
+                    </div>
 
-.section {
-    padding: 80px 30px 20px;
-}
+                    <span class="ingredient-number">
+                        INGREDIENT 0${index + 1}
+                    </span>
 
-.mission-card {
-    background:
-        radial-gradient(circle at 90% 10%, rgba(117, 84, 173, 0.35), transparent 35%),
-        linear-gradient(135deg, #24163e, #36205f);
-    color: white;
-    padding: 55px;
-    border-radius: 30px;
-    position: relative;
-    overflow: hidden;
-}
+                    <h3>
+                        ${ingredient.name}
+                    </h3>
 
-.mission-card::after {
-    content: "✦";
-    position: absolute;
-    right: 8%;
-    bottom: 0;
-    font-size: 180px;
-    color: rgba(240, 213, 138, 0.06);
-}
+                    <p>
+                        Click to discover
+                    </p>
 
-.mission-label {
-    color: var(--gold-light);
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    font-weight: 700;
-}
+                </div>
 
-.mission-card h2 {
-    font-family: "Playfair Display", serif;
-    font-size: clamp(38px, 5vw, 60px);
-    line-height: 1;
-    margin: 18px 0;
-}
 
-.mission-card p {
-    max-width: 620px;
-    color: #d7cedf;
-}
+                <div class="ingredient-back">
 
-.mission-goals {
-    display: flex;
-    gap: 30px;
-    margin-top: 35px;
-    flex-wrap: wrap;
-}
+                    <span class="ingredient-number">
+                        INGREDIENT CLUE
+                    </span>
 
-.mission-goals div {
-    color: #e9e1ef;
-    font-size: 12px;
-}
+                    <h3>
+                        ${ingredient.name}
+                    </h3>
 
-.mission-goals span {
-    color: var(--gold);
-    font-weight: 700;
-    margin-right: 8px;
-}
+                    <p>
+                        ${ingredient.clue}
+                    </p>
 
+                    <button
+                        class="add-button"
+                        onclick="addIngredient('${ingredient.id}', event)">
+                        + Add to Formula
+                    </button>
 
-/* =========================
-   AURA MESSAGE
-========================= */
-
-.aura-message {
-    margin-top: 18px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    background: white;
-    border: 1px solid var(--border);
-    padding: 18px 22px;
-    border-radius: 18px;
-}
+                </div>
 
-.aura-avatar {
-    min-width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: var(--purple);
-    color: var(--gold-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    box-shadow: 0 5px 20px rgba(51, 32, 95, 0.2);
-}
+            </div>
 
-.aura-message strong {
-    font-size: 13px;
-}
+        `;
 
-.aura-message p {
-    font-size: 13px;
-    color: var(--muted);
-    margin-top: 3px;
-}
 
+        card.addEventListener("click", function () {
 
-/* =========================
-   SECTION HEADINGS
-========================= */
+            card.classList.toggle("flipped");
 
-.section-heading {
-    display: flex;
-    align-items: flex-start;
-    gap: 18px;
-    margin-bottom: 35px;
-}
+        });
 
-.step-number {
-    width: 40px;
-    height: 40px;
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    flex-shrink: 0;
-}
 
-.section-heading h2 {
-    font-family: "Playfair Display", serif;
-    font-size: clamp(30px, 4vw, 45px);
-    line-height: 1.1;
-    margin: 5px 0 10px;
-}
+        ingredientContainer.appendChild(card);
 
-.section-heading p:not(.section-label) {
-    color: var(--muted);
-    max-width: 650px;
+    });
+
 }
 
 
-/* =========================
-   CLIENTS
-========================= */
+/* =========================================
+   START MISSION
+========================================= */
 
-.client-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-}
+function startMission() {
 
-.client-card {
-    text-align: left;
-    background: white;
-    border: 1px solid var(--border);
-    padding: 28px;
-    border-radius: 24px;
-    cursor: pointer;
-    transition: 0.35s ease;
-    color: var(--text);
-}
+    document.getElementById("landing")
+        .classList.add("hidden");
 
-.client-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--gold);
-    box-shadow: 0 15px 35px rgba(51, 32, 95, 0.1);
-}
+    document.getElementById("game")
+        .classList.remove("hidden");
 
-.client-card.selected {
-    border: 2px solid var(--gold);
-    background: #fffdf6;
-    box-shadow: 0 15px 35px rgba(201, 166, 75, 0.15);
-}
+    updateProgress(10);
 
-.client-icon {
-    font-size: 35px;
-    margin-bottom: 20px;
-}
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 
-.client-number {
-    font-size: 10px;
-    color: var(--gold);
-    letter-spacing: 0.16em;
-    font-weight: 700;
 }
 
-.client-card h3 {
-    font-family: "Playfair Display", serif;
-    font-size: 25px;
-    line-height: 1.1;
-    margin: 10px 0;
-}
 
-.client-card p {
-    font-size: 13px;
-    color: var(--muted);
-    min-height: 65px;
-}
+/* =========================================
+   SELECT CLIENT
+========================================= */
 
-.choose-text {
-    display: block;
-    margin-top: 20px;
-    font-size: 11px;
-    color: var(--purple-light);
-    font-weight: 700;
-}
+function selectClient(element, clientName) {
 
-.feedback {
-    margin-top: 18px;
-    padding: 16px 20px;
-    background: #f1edf9;
-    border-radius: 15px;
-    color: var(--purple);
-    font-size: 13px;
-}
+    document
+        .querySelectorAll(".client-card")
+        .forEach(card => {
 
+            card.classList.remove("selected");
 
-/* =========================
-   INGREDIENTS
-========================= */
+        });
 
-.ingredient-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-}
 
-.ingredient {
-    min-height: 235px;
-    perspective: 1000px;
-    cursor: pointer;
-}
+    element.classList.add("selected");
 
-.ingredient-inner {
-    width: 100%;
-    height: 100%;
-    min-height: 235px;
-    position: relative;
-    transition: transform 0.7s;
-    transform-style: preserve-3d;
-}
+    selectedClient = clientName;
 
-.ingredient.flipped .ingredient-inner {
-    transform: rotateY(180deg);
-}
 
-.ingredient-front,
-.ingredient-back {
-    position: absolute;
-    inset: 0;
-    backface-visibility: hidden;
-    border-radius: 22px;
-    padding: 25px;
-    border: 1px solid var(--border);
-    background: white;
-}
+    const result =
+        document.getElementById("clientResult");
 
-.ingredient-front {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
 
-.ingredient-back {
-    transform: rotateY(180deg);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background: linear-gradient(135deg, #33205f, #503484);
-    color: white;
-}
+    result.classList.remove("hidden");
 
-.ingredient-icon {
-    font-size: 42px;
-    margin-bottom: 18px;
-}
 
-.ingredient-number {
-    font-size: 9px;
-    color: var(--gold);
-    letter-spacing: 0.15em;
-}
+    result.innerHTML = `
 
-.ingredient h3 {
-    font-family: "Playfair Display", serif;
-    font-size: 21px;
-    margin: 7px 0;
-}
+        <strong>✦ Aura Study Buddy</strong>
 
-.ingredient-front p {
-    color: var(--muted);
-    font-size: 11px;
-}
+        <br>
 
-.ingredient-back p {
-    font-size: 13px;
-    color: #e6deeb;
-    margin-bottom: 20px;
-}
+        Excellent choice.
 
-.add-button {
-    border: 1px solid rgba(240, 213, 138, 0.5);
-    background: transparent;
-    color: var(--gold-light);
-    padding: 10px;
-    border-radius: 30px;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 11px;
-}
+        Your formulation should now consider:
 
-.add-button:hover {
-    background: var(--gold);
-    color: var(--purple-dark);
-}
+        <strong>${clientName}</strong>.
 
-.ingredient.used .ingredient-front {
-    border: 2px solid var(--gold);
-}
+    `;
 
-.ingredient.used .ingredient-front::after {
-    content: "✓ ADDED";
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 8px;
-    color: var(--gold);
-    font-weight: 700;
-}
 
-.aura-tip {
-    margin-top: 20px;
-    padding: 20px;
-    background: #f4f0fa;
-    border-radius: 18px;
-    display: flex;
-    gap: 15px;
-}
+    updateProgress(25);
 
-.aura-tip > span {
-    color: var(--gold);
-    font-size: 25px;
 }
 
-.aura-tip strong {
-    font-size: 12px;
-}
 
-.aura-tip p {
-    color: var(--muted);
-    font-size: 12px;
-}
+/* =========================================
+   ADD INGREDIENT
+========================================= */
 
+function addIngredient(id, event) {
 
-/* =========================
-   FORMULATION CORE
-========================= */
+    event.stopPropagation();
 
-.formulation-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
 
-.lab-panel {
-    min-height: 450px;
-    background:
-        radial-gradient(circle at 50% 45%, #5e3f8e, transparent 30%),
-        linear-gradient(145deg, #171026, #33205f);
-    border-radius: 28px;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    position: relative;
-}
+    const ingredient =
+        ingredients.find(item => item.id === id);
 
-.beaker {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 65px;
-    color: var(--gold-light);
-    background: radial-gradient(circle, #7554ad, #33205f);
-    border: 1px solid rgba(240, 213, 138, 0.4);
-    box-shadow:
-        0 0 40px rgba(117, 84, 173, 0.7),
-        0 0 80px rgba(201, 166, 75, 0.2);
-    animation: floating 4s ease-in-out infinite;
-}
 
-.beaker::before {
-    content: "";
-    position: absolute;
-    inset: -20px;
-    border: 1px solid rgba(240, 213, 138, 0.2);
-    border-radius: 50%;
-    animation: ring 3s linear infinite;
-}
+    if (!ingredient) {
+        return;
+    }
 
-.liquid {
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: rgba(240, 213, 138, 0.25);
-    filter: blur(10px);
-}
 
-.lab-status {
-    margin-top: 35px;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    color: var(--gold-light);
-}
+    const alreadyAdded =
+        selectedIngredients.some(item => item.id === id);
 
-.lab-subtitle {
-    font-size: 11px;
-    color: #aaa0b8;
-    margin-top: 5px;
-}
 
-.formula-panel {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 28px;
-    padding: 30px;
-}
+    if (alreadyAdded) {
 
-.panel-title {
-    display: flex;
-    justify-content: space-between;
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    font-weight: 700;
-    color: var(--muted);
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--border);
-}
+        showTemporaryMessage(
+            "This ingredient is already in your formula."
+        );
 
-.selected-list {
-    min-height: 210px;
-    padding: 20px 0;
-}
+        return;
 
-.empty-state {
-    height: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-    color: var(--muted);
-}
+    }
 
-.empty-state span {
-    width: 45px;
-    height: 45px;
-    border: 1px dashed var(--gold);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--gold);
-    font-size: 25px;
-    margin-bottom: 12px;
-}
 
-.empty-state p {
-    font-size: 11px;
-}
+    const currentTotal =
+        calculateTotal();
 
-.selected-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px;
-    background: #faf8fc;
-    border-radius: 12px;
-    margin-bottom: 8px;
-    font-size: 12px;
-}
 
-.selected-item button {
-    border: none;
-    background: none;
-    color: #a86b6b;
-    cursor: pointer;
-    font-size: 10px;
-}
+    if (currentTotal + ingredient.cost > budget) {
 
-.budget-box {
-    border-top: 1px solid var(--border);
-    padding-top: 20px;
-}
+        showTemporaryMessage(
+            "Your formulation budget would be exceeded. Try another ingredient."
+        );
 
-.budget-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        return;
 
-.small-label {
-    display: block;
-    font-size: 8px;
-    letter-spacing: 0.15em;
-    color: var(--muted);
-}
+    }
 
-.budget-header strong {
-    font-family: "Playfair Display", serif;
-    font-size: 20px;
-}
 
-.budget-track {
-    height: 8px;
-    background: #ebe7ed;
-    border-radius: 20px;
-    margin-top: 15px;
-    overflow: hidden;
-}
+    selectedIngredients.push(ingredient);
 
-.budget-fill {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, var(--purple-light), var(--gold));
-    transition: 0.5s ease;
-}
 
-#budgetMessage {
-    font-size: 10px;
-    color: var(--muted);
-    margin-top: 8px;
-}
+    const card =
+        document.querySelector(
+            `.ingredient[data-id="${id}"]`
+        );
 
 
-/* =========================
-   SUSTAINABILITY
-========================= */
+    if (card) {
+        card.classList.add("used");
+    }
 
-.sustainability-card {
-    background: linear-gradient(135deg, #253c2d, #41694d);
-    color: white;
-    padding: 50px;
-    border-radius: 28px;
-}
 
-.eco-icon {
-    font-size: 45px;
-    color: #b9d9bd;
-}
+    updateFormula();
 
-.sustainability-card .section-label {
-    color: #b9d9bd;
-    margin-top: 15px;
-}
 
-.sustainability-card h2 {
-    font-family: "Playfair Display", serif;
-    font-size: 42px;
-    line-height: 1.1;
-    margin: 12px 0;
-}
+    if (id === "tamarind") {
 
-.sustainability-card > p:not(.section-label) {
-    color: #d4e3d5;
-    max-width: 600px;
-}
+        document
+            .getElementById("sustainabilityCard")
+            .classList.remove("hidden");
 
-.eco-flow {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-top: 35px;
-    flex-wrap: wrap;
-}
+    }
 
-.eco-step {
-    background: rgba(255, 255, 255, 0.08);
-    padding: 16px 20px;
-    border-radius: 15px;
-    font-size: 12px;
-}
 
-.eco-step span {
-    display: block;
-    color: #b9d9bd;
-    font-size: 9px;
-    margin-bottom: 5px;
-}
+    updateProgress(55);
 
-.eco-arrow {
-    color: #b9d9bd;
 }
 
 
-/* =========================
-   ACTIVATE
-========================= */
+/* =========================================
+   REMOVE INGREDIENT
+========================================= */
 
-.activate-section {
-    text-align: center;
-    padding: 100px 30px;
-}
+function removeIngredient(id) {
 
-.activate-section h2 {
-    font-family: "Playfair Display", serif;
-    font-size: clamp(35px, 5vw, 55px);
-    line-height: 1.05;
-    margin: 12px 0 28px;
-}
+    selectedIngredients =
+        selectedIngredients.filter(
+            ingredient => ingredient.id !== id
+        );
 
-.warning {
-    color: #a55757;
-    font-size: 12px;
-    margin-top: 15px;
-}
 
+    const card =
+        document.querySelector(
+            `.ingredient[data-id="${id}"]`
+        );
 
-/* =========================
-   RESULT
-========================= */
-
-.result-card {
-    background: linear-gradient(145deg, #211332, #38205e);
-    color: white;
-    text-align: center;
-    padding: 60px 30px;
-    border-radius: 30px;
-    overflow: hidden;
-}
 
-.formula-animation {
-    height: 240px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+    if (card) {
+        card.classList.remove("used");
+    }
 
-.formula-bottle {
-    animation: bottleReveal 1.5s ease forwards;
-}
 
-.bottle-cap {
-    width: 65px;
-    height: 25px;
-    background: #b28b32;
-    margin: auto;
-    border-radius: 5px 5px 0 0;
-}
+    updateFormula();
 
-.bottle-body {
-    width: 120px;
-    height: 150px;
-    background: linear-gradient(145deg, #d8b862, #a47c27);
-    border-radius: 10px 10px 20px 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #24172f;
-    box-shadow: 0 20px 60px rgba(201, 166, 75, 0.35);
-}
 
-.bottle-body span {
-    font-family: "Playfair Display", serif;
-    font-size: 24px;
-}
+    const hasTamarind =
+        selectedIngredients.some(
+            ingredient => ingredient.id === "tamarind"
+        );
 
-.bottle-body small {
-    letter-spacing: 0.15em;
-    font-size: 7px;
-}
 
-.particle {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--gold-light);
-    box-shadow: 0 0 15px var(--gold);
-}
+    if (!hasTamarind) {
 
-.particle-one {
-    left: 35%;
-    animation: particleOne 2.5s infinite;
-}
+        document
+            .getElementById("sustainabilityCard")
+            .classList.add("hidden");
 
-.particle-two {
-    right: 35%;
-    animation: particleTwo 3s infinite;
-}
+    }
 
-.particle-three {
-    left: 50%;
-    top: 20%;
-    animation: particleThree 2s infinite;
 }
 
-.result-card h2 {
-    font-family: "Playfair Display", serif;
-    color: var(--gold-light);
-    font-size: 48px;
-}
 
-.result-card > p {
-    color: #cfc4d9;
-    max-width: 600px;
-    margin: 10px auto 25px;
-}
+/* =========================================
+   CALCULATE TOTAL
+========================================= */
 
-.achievement {
-    max-width: 400px;
-    margin: 30px auto;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    text-align: left;
-    padding: 18px;
-    border: 1px solid rgba(240, 213, 138, 0.3);
-    border-radius: 18px;
-    background: rgba(255, 255, 255, 0.04);
-}
+function calculateTotal() {
+
+    return selectedIngredients.reduce(
+        (total, ingredient) => {
 
-.achievement-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: var(--gold);
-    color: var(--purple-dark);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+            return total + ingredient.cost;
+
+        },
+
+        0
+    );
+
 }
+
+
+/* =========================================
+   UPDATE FORMULA
+========================================= */
+
+function updateFormula() {
+
+    const total =
+        calculateTotal();
+
+
+    ingredientCount.textContent =
+        `${selectedIngredients.length} ingredient${selectedIngredients.length === 1 ? "" : "s"}`;
+
+
+    budgetText.textContent =
+        `RM${total.toFixed(2)}`;
+
+
+    const percentage =
+        Math.min((total / budget) * 100, 100);
 
-.achievement span {
-    display: block;
-    font-size: 8px;
-    letter-spacing: 0.15em;
-    color: #a99cb4;
+
+    budgetFill.style.width =
+        `${percentage}%`;
+
+
+    if (total === 0) {
+
+        budgetMessage.textContent =
+            "You have RM20.00 remaining.";
+
+    }
+
+    else if (total < budget) {
+
+        const remaining =
+            budget - total;
+
+        budgetMessage.textContent =
+            `You have RM${remaining.toFixed(2)} remaining.`;
+
+    }
+
+    else {
+
+        budgetMessage.textContent =
+            "Your budget is fully allocated.";
+
+    }
+
+
+    if (selectedIngredients.length === 0) {
+
+        selectedList.innerHTML = `
+
+            <div class="empty-state">
+
+                <span>+</span>
+
+                <p>
+                    Select ingredients<br>
+                    from the Ingredient Vault
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    selectedList.innerHTML = "";
+
+
+    selectedIngredients.forEach(ingredient => {
+
+        const item =
+            document.createElement("div");
+
+
+        item.className =
+            "selected-item";
+
+
+        item.innerHTML = `
+
+            <span>
+                ${ingredient.icon}
+                ${ingredient.name}
+            </span>
+
+            <span>
+
+                RM${ingredient.cost.toFixed(2)}
+
+                <button
+                    onclick="removeIngredient('${ingredient.id}')">
+                    REMOVE
+                </button>
+
+            </span>
+
+        `;
+
+
+        selectedList.appendChild(item);
+
+    });
+
+
+    updateBeaker();
+
 }
+
+
+/* =========================================
+   UPDATE BEAKER
+========================================= */
+
+function updateBeaker() {
+
+    const beaker =
+        document.getElementById("beaker");
+
+
+    const count =
+        selectedIngredients.length;
+
 
-.achievement strong {
-    display: block;
-    color: var(--gold-light);
-    font-family: "Playfair Display", serif;
-    font-size: 20px;
+    if (count === 0) {
+
+        beaker.style.boxShadow =
+            "0 0 40px rgba(117, 84, 173, 0.7)";
+
+    }
+
+    else if (count <= 2) {
+
+        beaker.style.boxShadow =
+            "0 0 50px rgba(201, 166, 75, 0.5)";
+
+    }
+
+    else {
+
+        beaker.style.boxShadow =
+            "0 0 80px rgba(117, 84, 173, 0.9)";
+
+    }
+
 }
+
+
+/* =========================================
+   ACTIVATE FORMULATION
+========================================= */
+
+function activateFormula() {
+
+    const warning =
+        document.getElementById("activationWarning");
+
+
+    if (selectedClient === "") {
+
+        warning.textContent =
+            "Please select a client profile first.";
+
+        return;
+
+    }
+
+
+    if (selectedIngredients.length < 2) {
+
+        warning.textContent =
+            "Please discover and select at least 2 ingredients.";
+
+        return;
+
+    }
+
+
+    const total =
+        calculateTotal();
+
+
+    if (total > budget) {
+
+        warning.textContent =
+            "Your formulation is over budget.";
+
+        return;
+
+    }
+
+
+    warning.textContent = "";
+
+
+    const resultCard =
+        document.getElementById("resultCard");
+
+
+    const reflection =
+        document.getElementById("reflection");
+
+
+    const hasTamarind =
+        selectedIngredients.some(
+            ingredient => ingredient.id === "tamarind"
+        );
+
+
+    const hasGeranium =
+        selectedIngredients.some(
+            ingredient => ingredient.id === "geranium"
+        );
+
+
+    const hasGromwell =
+        selectedIngredients.some(
+            ingredient => ingredient.id === "gromwell"
+        );
+
+
+    let identityTitle;
+
+    let identityText;
+
+    let auraMessage;
+
+
+    if (hasTamarind) {
+
+        identityTitle =
+            "Green Innovator";
+
+        identityText =
+            "You prioritised sustainability while building a botanical formulation.";
+
+        auraMessage =
+            "You identified an opportunity to connect cosmetic innovation with upcycling. That's strong sustainability thinking!";
+
+    }
+
+    else if (
+        hasGeranium &&
+        selectedClient === "Luxury Botanical"
+    ) {
+
+        identityTitle =
+            "Botanical Formulator";
+
+        identityText =
+            "You created a formulation direction focused on botanical character and premium sensory experience.";
+
+        auraMessage =
+            "Your choices show strong awareness of the sensory side of cosmetic product development.";
+
+    }
+
+    else if (hasGromwell) {
+
+        identityTitle =
+            "Creative Formulator";
+
+        identityText =
+            "You explored botanical ingredients to create a distinctive formulation concept.";
+
+        auraMessage =
+            "Creative formulation starts with curiosity. You explored your ingredients thoughtfully.";
+
+    }
+
+    else {
+
+        identityTitle =
+            "Client-Centred Formulator";
+
+        identityText =
+            "You focused on creating a formulation that responds to the needs of your chosen client.";
+
+        auraMessage =
+            "You kept your client's needs at the centre of your formulation decisions. Excellent!";
+
+    }
+
+
+    document.getElementById("identityTitle")
+        .textContent = identityTitle;
+
+
+    document.getElementById("identityText")
+        .textContent = identityText;
+
+
+    document.getElementById("badgeName")
+        .textContent = identityTitle;
+
+
+    document.getElementById("auraResultMessage")
+        .textContent = auraMessage;
+
+
+    resultCard.classList.remove("hidden");
+
+
+    reflection.classList.remove("hidden");
+
+
+    updateProgress(80);
+
+
+    setTimeout(() => {
+
+        resultCard.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+    }, 200);
 
-.result-message {
-    max-width: 600px;
-    margin: 25px auto 0;
-    text-align: left;
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 255, 255, 0.1);
 }
 
 
-/* =========================
+/* =========================================
    REFLECTION
-========================= */
+========================================= */
 
-.reflection-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-}
+function reflect(choice) {
 
-.reflection-grid button {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 25px;
-    text-align: left;
-    cursor: pointer;
-    transition: 0.3s;
-    color: var(--text);
-}
+    const reflectionText =
+        document.getElementById("reflectionText");
 
-.reflection-grid button:hover {
-    border-color: var(--gold);
-    transform: translateY(-4px);
-}
 
-.reflection-grid span {
-    display: block;
-    color: var(--gold);
-    font-size: 28px;
-    margin-bottom: 15px;
-}
+    reflectionText.classList.remove("hidden");
 
-.reflection-grid strong {
-    display: block;
-    font-size: 13px;
-}
 
-.reflection-grid small {
-    display: block;
-    color: var(--muted);
-    margin-top: 5px;
-}
+    reflectionText.innerHTML = `
 
-.reflection-result {
-    margin-top: 20px;
-    padding: 20px;
-    background: #f1edf9;
-    border-radius: 18px;
-    color: var(--purple);
-    font-size: 13px;
-}
+        <strong>✦ Aura Study Buddy</strong>
 
-.complete-message {
-    margin-top: 25px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 22px;
-}
+        <br><br>
 
-.complete-message > span {
-    color: var(--gold);
-    font-size: 25px;
-}
+        Excellent reflection.
 
-.complete-message strong {
-    font-size: 13px;
-}
+        Your second iteration focuses on:
 
-.complete-message p {
-    color: var(--muted);
-    font-size: 12px;
+        <strong>${choice}</strong>.
+
+        <br><br>
+
+        Remember:
+
+        great formulation is not about getting
+        everything right on the first attempt.
+
+        It is about making informed decisions,
+        evaluating the result and improving it.
+
+    `;
+
+
+    updateProgress(100);
+
+
+    setTimeout(() => {
+
+        reflectionText.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+    }, 100);
+
 }
 
 
-/* =========================
-   FOOTER
-========================= */
+/* =========================================
+   PROGRESS
+========================================= */
 
-footer {
-    background: var(--purple-dark);
-    color: white;
-    text-align: center;
-    padding: 45px 20px;
-    margin-top: 80px;
-}
+function updateProgress(value) {
 
-.footer-brand {
-    color: var(--gold-light);
-    letter-spacing: 0.2em;
-    font-size: 12px;
-    font-weight: 700;
-}
+    missionProgress.style.width =
+        `${value}%`;
 
-footer p {
-    color: #8f8499;
-    font-size: 11px;
-    margin-top: 8px;
+    progressText.textContent =
+        `${value}%`;
+
 }
 
 
-/* =========================
-   ANIMATIONS
-========================= */
+/* =========================================
+   TEMPORARY MESSAGE
+========================================= */
 
-@keyframes floating {
-    0%, 100% {
-        transform: translateY(0);
-    }
+function showTemporaryMessage(message) {
 
-    50% {
-        transform: translateY(-10px);
-    }
-}
+    const warning =
+        document.getElementById("activationWarning");
 
-@keyframes ring {
-    from {
-        transform: rotate(0deg);
-    }
 
-    to {
-        transform: rotate(360deg);
-    }
-}
+    warning.textContent =
+        message;
 
-@keyframes bottleReveal {
-    0% {
-        transform: scale(0.4) translateY(50px);
-        opacity: 0;
-    }
 
-    100% {
-        transform: scale(1) translateY(0);
-        opacity: 1;
-    }
-}
+    setTimeout(() => {
 
-@keyframes particleOne {
-    0%, 100% {
-        transform: translateY(20px);
-        opacity: 0;
-    }
+        warning.textContent = "";
 
-    50% {
-        transform: translateY(-50px);
-        opacity: 1;
-    }
-}
+    }, 3000);
 
-@keyframes particleTwo {
-    0%, 100% {
-        transform: translateY(20px);
-        opacity: 0;
-    }
-
-    50% {
-        transform: translateY(-70px);
-        opacity: 1;
-    }
-}
-
-@keyframes particleThree {
-    0%, 100% {
-        transform: translateY(20px);
-        opacity: 0;
-    }
-
-    50% {
-        transform: translateY(-60px);
-        opacity: 1;
-    }
 }
 
 
-/* =========================
-   MOBILE
-========================= */
+/* =========================================
+   INITIALISE
+========================================= */
 
-@media (max-width: 900px) {
+createIngredientCards();
 
-    .client-grid,
-    .reflection-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .ingredient-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .formulation-layout {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 600px) {
-
-    .topbar {
-        padding: 0 20px;
-    }
-
-    .mission-progress {
-        display: none;
-    }
-
-    .section {
-        padding: 55px 18px 10px;
-    }
-
-    .mission-card {
-        padding: 35px 25px;
-    }
-
-    .client-grid,
-    .ingredient-grid,
-    .reflection-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .sustainability-card {
-        padding: 35px 25px;
-    }
-
-    .sustainability-card h2 {
-        font-size: 34px;
-    }
-
-    .eco-flow {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .eco-arrow {
-        text-align: center;
-        transform: rotate(90deg);
-    }
-
-    .landing h1 {
-        font-size: 48px;
-    }
-}
+updateProgress(0);
