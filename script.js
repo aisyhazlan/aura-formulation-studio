@@ -509,3 +509,30 @@ document.addEventListener(
 
     }
 );
+/* =========================================
+   START MISSION
+========================================= */
+
+function startMission() {
+
+    const landing = document.getElementById("landing");
+    const game = document.getElementById("game");
+
+    if (!landing || !game) {
+        console.error("Landing or game section not found.");
+        return;
+    }
+
+    // Hide landing page
+    landing.classList.add("hidden");
+
+    // Show game
+    game.classList.remove("hidden");
+
+    // Start from the top of the game
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
