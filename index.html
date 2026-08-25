@@ -11,13 +11,31 @@
 <body>
 
 <section id="landing" class="hero">
+
 <div class="overlay"></div>
+
 <div class="hero-content">
-<h1>⚗️ Aura Formulation Quest</h1>
-<p>From Ingredient Discovery to Cosmetic Innovation</p>
+
+<div class="hero-icon">⚗️</div>
+
+<h1>Aura Formulation Quest</h1>
+
+<p>Think • Discover • Formulate • Innovate</p>
+
 <button onclick="startMission()">Begin Mission</button>
+
 </div>
+
 </section>
+.hero-icon{
+
+font-size:80px;
+
+margin-bottom:20px;
+
+animation:float 3s infinite;
+
+}  
 
 <section id="game" class="hidden">
 
@@ -92,15 +110,69 @@
 <p>You selected Tamarind Seed Extract.</p>
 
 <div class="flow">
-<div>Waste</div>
-<div>↓</div>
-<div>Upcycling</div>
-<div>↓</div>
-<div>Innovation</div>
-</div>
+
+<div class="step">🗑️<span>Waste</span></div>
+
+<div class="arrow">→</div>
+
+<div class="step">♻️<span>Upcycling</span></div>
+
+<div class="arrow">→</div>
+
+<div class="step">✨<span>Innovation</span></div>
 
 </div>
+.flow{
 
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+gap:20px;
+
+flex-wrap:wrap;
+
+margin-top:20px;
+
+}
+
+.step{
+
+background:white;
+
+padding:20px;
+
+border-radius:20px;
+
+box-shadow:0 8px 20px rgba(108,74,182,.12);
+
+text-align:center;
+
+width:120px;
+
+}
+
+.step span{
+
+display:block;
+
+margin-top:10px;
+
+font-size:.85rem;
+
+font-weight:600;
+
+}
+
+.arrow{
+
+font-size:28px;
+
+color:#D4AF37;
+
+}
 <div class="center">
 <button onclick="activateFormula()">Activate Formulation</button>
 </div>
