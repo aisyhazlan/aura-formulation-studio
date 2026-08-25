@@ -1,6 +1,7 @@
 /* =========================================================
    AURA FORMULATION QUEST
-   COMPLETE GAME SCRIPT
+   COMPLETE SCRIPT
+   PRODUCT FORMULATION SYSTEM
 ========================================================= */
 
 
@@ -71,6 +72,47 @@ const ingredients = [
         cost: 3.00,
         clue: "A warm aromatic note that can contribute to the sensory identity of a cosmetic product.",
         role: "Fragrance Note"
+    },
+
+
+    /* =====================================================
+       NEW INGREDIENTS
+    ===================================================== */
+
+    {
+        id: "cocoaButter",
+        name: "Cocoa Butter",
+        icon: "🧈",
+        cost: 3.50,
+        clue: "A rich plant-based butter commonly used to create a nourishing solid balm texture.",
+        role: "Butter / Balm Base"
+    },
+
+    {
+        id: "pandan",
+        name: "Pandan Essential Oil",
+        icon: "🌿",
+        cost: 4.00,
+        clue: "An aromatic botanical ingredient that contributes a distinctive tropical sensory experience.",
+        role: "Essential Oil"
+    },
+
+    {
+        id: "mint",
+        name: "Mint",
+        icon: "🌱",
+        cost: 2.50,
+        clue: "A refreshing botanical ingredient suitable for a cooling and revitalising sensory concept.",
+        role: "Botanical Ingredient"
+    },
+
+    {
+        id: "coffee",
+        name: "Coffee Grounds",
+        icon: "☕",
+        cost: 2.00,
+        clue: "A natural particulate ingredient that can support an exfoliating body scrub concept.",
+        role: "Natural Exfoliant"
     }
 
 ];
@@ -86,7 +128,22 @@ let selectedClient = null;
 
 let reflectionChoice = null;
 
+let formulaActivated = false;
+
 const budget = 20;
+
+
+/* =========================================================
+   HELPER
+========================================================= */
+
+function hasIngredient(id) {
+
+    return selectedIngredients.some(
+        ingredient => ingredient.id === id
+    );
+
+}
 
 
 /* =========================================================
@@ -95,8 +152,12 @@ const budget = 20;
 
 function startMission() {
 
-    const landing = document.getElementById("landing");
-    const game = document.getElementById("game");
+    const landing =
+        document.getElementById("landing");
+
+    const game =
+        document.getElementById("game");
+
 
     if (!landing || !game) {
 
@@ -105,36 +166,20 @@ function startMission() {
         );
 
         return;
+
     }
 
 
-    /*
-    Hide landing page
-    */
-
     landing.classList.add("hidden");
-
-
-    /*
-    Show game
-    */
 
     game.classList.remove("hidden");
 
-
-    /*
-    Scroll to top
-    */
 
     window.scrollTo({
         top: 0,
         behavior: "smooth"
     });
 
-
-    /*
-    Update progress
-    */
 
     updateMissionProgress();
 
@@ -152,10 +197,6 @@ function selectClient(button, clientName) {
     }
 
 
-    /*
-    Remove previous selection
-    */
-
     document
         .querySelectorAll(".client-card")
         .forEach(card => {
@@ -165,19 +206,11 @@ function selectClient(button, clientName) {
         });
 
 
-    /*
-    Select current client
-    */
-
     button.classList.add("selected");
 
 
     selectedClient = clientName;
 
-
-    /*
-    Show feedback
-    */
 
     const clientResult =
         document.getElementById("clientResult");
@@ -188,50 +221,60 @@ function selectClient(button, clientName) {
         let message = "";
 
 
-        if (clientName === "Lightweight Botanical") {
+        if (
+            clientName ===
+            "Lightweight Botanical"
+        ) {
 
             message =
-                "Good choice. Focus on lightweight botanical oils and a clean, elegant sensory profile.";
-
-        }
-
-        else if (clientName === "Sustainability First") {
-
-            message =
-                "Excellent. Prioritise upcycled ingredients, responsible choices and minimal fragrance.";
-
-        }
-
-        else if (clientName === "Luxury Botanical") {
-
-            message =
-                "A premium direction. Consider botanical ingredients that create a refined sensory experience.";
+                "A lightweight botanical direction. Consider oils and ingredients that create an elegant, lightweight sensory experience.";
 
         }
 
 
-        clientResult.textContent = message;
+        else if (
+            clientName ===
+            "Sustainability First"
+        ) {
 
-        clientResult.classList.remove("hidden");
+            message =
+                "A sustainability-led direction. Look for upcycled and responsible ingredient choices.";
+
+        }
+
+
+        else if (
+            clientName ===
+            "Luxury Botanical"
+        ) {
+
+            message =
+                "A premium botanical direction. Think about botanical character, sensory experience and formulation identity.";
+
+        }
+
+
+        clientResult.textContent =
+            message;
+
+
+        clientResult.classList.remove(
+            "hidden"
+        );
 
     }
 
 
-    /*
-    Update progress
-    */
-
     updateMissionProgress();
 
-
-    /*
-    Smooth scroll to Ingredient Vault
-    */
 
     setTimeout(() => {
 
         const ingredientSection =
-            document.getElementById("ingredients");
+            document.getElementById(
+                "ingredients"
+            );
+
 
         if (ingredientSection) {
 
@@ -254,7 +297,9 @@ function selectClient(button, clientName) {
 function createIngredientCards() {
 
     const container =
-        document.getElementById("ingredients");
+        document.getElementById(
+            "ingredients"
+        );
 
 
     if (!container) {
@@ -290,8 +335,6 @@ function createIngredientCards() {
 
                 <div class="ingredient-inner">
 
-                    <!-- FRONT -->
-
                     <div class="ingredient-front">
 
                         <div class="ingredient-icon">
@@ -299,7 +342,7 @@ function createIngredientCards() {
                         </div>
 
                         <span class="ingredient-number">
-                            INGREDIENT 0${index + 1}
+                            INGREDIENT ${String(index + 1).padStart(2, "0")}
                         </span>
 
                         <h3>
@@ -312,8 +355,6 @@ function createIngredientCards() {
 
                     </div>
 
-
-                    <!-- BACK -->
 
                     <div class="ingredient-back">
 
@@ -334,6 +375,11 @@ function createIngredientCards() {
                             ${ingredient.role}
                         </p>
 
+                        <p>
+                            <strong>Cost:</strong>
+                            RM${ingredient.cost.toFixed(2)}
+                        </p>
+
                         <button
                             type="button"
                             class="add-button"
@@ -348,21 +394,14 @@ function createIngredientCards() {
             `;
 
 
-            /*
-            Click card to flip
-            */
-
             card.addEventListener(
                 "click",
                 function(event) {
 
-                    /*
-                    Jangan flip semula apabila
-                    tekan Add to Formula
-                    */
-
                     if (
-                        event.target.closest(".add-button")
+                        event.target.closest(
+                            ".add-button"
+                        )
                     ) {
 
                         return;
@@ -417,10 +456,6 @@ function addIngredient(id, event) {
     }
 
 
-    /*
-    Check duplicate
-    */
-
     const alreadyAdded =
         selectedIngredients.some(
             item => item.id === id
@@ -438,16 +473,13 @@ function addIngredient(id, event) {
     }
 
 
-    /*
-    Check budget
-    */
-
     const currentTotal =
         calculateTotal();
 
 
     if (
-        currentTotal + ingredient.cost > budget
+        currentTotal + ingredient.cost >
+        budget
     ) {
 
         alert(
@@ -459,18 +491,10 @@ function addIngredient(id, event) {
     }
 
 
-    /*
-    Add ingredient
-    */
-
     selectedIngredients.push(
         ingredient
     );
 
-
-    /*
-    Mark ingredient card as used
-    */
 
     const card =
         document.querySelector(
@@ -485,15 +509,11 @@ function addIngredient(id, event) {
     }
 
 
-    /*
-    Update formula
-    */
-
     updateFormula();
 
 
     /*
-    Sustainability boost
+    TAMARIND SUSTAINABILITY
     */
 
     if (id === "tamarind") {
@@ -514,10 +534,6 @@ function addIngredient(id, event) {
 
     }
 
-
-    /*
-    Update progress
-    */
 
     updateMissionProgress();
 
@@ -582,9 +598,9 @@ function updateFormula() {
         calculateTotal();
 
 
-    /* =====================================================
-       INGREDIENT COUNT
-    ===================================================== */
+    /*
+    INGREDIENT COUNT
+    */
 
     if (ingredientCount) {
 
@@ -598,9 +614,9 @@ function updateFormula() {
     }
 
 
-    /* =====================================================
-       BUDGET TEXT
-    ===================================================== */
+    /*
+    BUDGET
+    */
 
     if (budgetText) {
 
@@ -610,9 +626,9 @@ function updateFormula() {
     }
 
 
-    /* =====================================================
-       BUDGET PROGRESS BAR
-    ===================================================== */
+    /*
+    BUDGET BAR
+    */
 
     if (budgetFill) {
 
@@ -629,9 +645,9 @@ function updateFormula() {
     }
 
 
-    /* =====================================================
-       REMAINING BUDGET
-    ===================================================== */
+    /*
+    REMAINING
+    */
 
     if (budgetMessage) {
 
@@ -656,10 +672,6 @@ function updateFormula() {
     }
 
 
-    /* =====================================================
-       SELECTED INGREDIENT LIST
-    ===================================================== */
-
     if (!selectedList) {
 
         return;
@@ -668,7 +680,7 @@ function updateFormula() {
 
 
     /*
-    Empty state
+    EMPTY STATE
     */
 
     if (
@@ -695,22 +707,20 @@ function updateFormula() {
     }
 
 
-    /*
-    Clear previous list
-    */
-
     selectedList.innerHTML = "";
 
 
     /*
-    Create selected items
+    SELECTED INGREDIENTS
     */
 
     selectedIngredients.forEach(
         ingredient => {
 
             const item =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
 
 
             item.className =
@@ -725,6 +735,7 @@ function updateFormula() {
                 </span>
 
                 <span>
+
                     RM${ingredient.cost.toFixed(2)}
 
                     <button
@@ -732,6 +743,7 @@ function updateFormula() {
                         onclick="removeIngredient('${ingredient.id}')">
                         REMOVE
                     </button>
+
                 </span>
 
             `;
@@ -760,10 +772,6 @@ function removeIngredient(id) {
         );
 
 
-    /*
-    Remove used state from card
-    */
-
     const card =
         document.querySelector(
             `.ingredient[data-id="${id}"]`
@@ -779,22 +787,15 @@ function removeIngredient(id) {
     }
 
 
-    /*
-    Update formula
-    */
-
     updateFormula();
 
 
     /*
-    Sustainability
+    SUSTAINABILITY CARD
     */
 
     const hasTamarind =
-        selectedIngredients.some(
-            ingredient =>
-                ingredient.id === "tamarind"
-        );
+        hasIngredient("tamarind");
 
 
     if (!hasTamarind) {
@@ -816,191 +817,180 @@ function removeIngredient(id) {
     }
 
 
-    /*
-    Update progress
-    */
-
     updateMissionProgress();
 
 }
 
 
 /* =========================================================
-   ACTIVATE FORMULA
+   DETERMINE PRODUCT
+=========================================================
+
+   PRODUCT PRIORITY:
+
+   1. Coffee Grounds
+      → Body Scrub
+
+   2. Pandan + Mint
+      → Body Massage Oil
+
+   3. Cocoa Butter
+      → Balm
+
+   4. Everything else
+      → Nail Oil
+
 ========================================================= */
 
-function activateFormula() {
-
-    const warning =
-        document.getElementById(
-            "activationWarning"
-        );
+function determineProduct() {
 
 
     /*
-    Check client
-    */
-
-    if (!selectedClient) {
-
-        if (warning) {
-
-            warning.textContent =
-                "Please select a client profile before activating your formulation.";
-
-        }
-
-        alert(
-            "Please select a client profile first."
-        );
-
-        return;
-
-    }
-
-
-    /*
-    Check ingredients
+    ========================================================
+    COFFEE GROUNDS
+    ========================================================
     */
 
     if (
-        selectedIngredients.length === 0
+        hasIngredient("coffee")
     ) {
 
-        if (warning) {
+        return {
 
-            warning.textContent =
-                "Please select at least one ingredient for your formula.";
+            type: "Body Scrub",
 
-        }
+            name:
+                "Aura Coffee Glow Body Scrub",
 
-        alert(
-            "Please select at least one ingredient."
-        );
+            icon:
+                "☕",
 
-        return;
+            description:
+                "An exfoliating botanical body scrub concept featuring coffee grounds as a natural exfoliating ingredient.",
 
-    }
+            category:
+                "Exfoliating Body Care",
 
+            benefit:
+                "Designed around a refreshing exfoliation concept with a natural coffee-inspired identity."
 
-    /*
-    Check budget
-    */
-
-    const total =
-        calculateTotal();
-
-
-    if (total > budget) {
-
-        if (warning) {
-
-            warning.textContent =
-                "Your formulation is over the RM20 budget.";
-
-        }
-
-        alert(
-            "Your formulation is over the RM20 budget."
-        );
-
-        return;
+        };
 
     }
 
 
     /*
-    Clear warning
+    ========================================================
+    PANDAN + MINT
+    ========================================================
     */
 
-    if (warning) {
+    if (
+        hasIngredient("pandan") &&
+        hasIngredient("mint")
+    ) {
 
-        warning.textContent = "";
+        return {
+
+            type: "Body Massage Oil",
+
+            name:
+                "Aura Pandan Mint Massage Oil",
+
+            icon:
+                "🌿",
+
+            description:
+                "A refreshing botanical body massage oil concept combining aromatic pandan and mint for a revitalising sensory experience.",
+
+            category:
+                "Body Care",
+
+            benefit:
+                "Designed for a refreshing and relaxing body massage experience."
+
+        };
 
     }
 
 
     /*
-    Generate formula identity
+    ========================================================
+    COCOA BUTTER
+    ========================================================
     */
 
-    generateFormulaResult();
+    if (
+        hasIngredient("cocoaButter")
+    ) {
 
+        return {
 
-    /*
-    Show result
-    */
+            type: "Botanical Balm",
 
-    const resultCard =
-        document.getElementById(
-            "resultCard"
-        );
+            name:
+                "Aura Cocoa Nourish Balm",
 
+            icon:
+                "🧈",
 
-    if (resultCard) {
+            description:
+                "A rich botanical balm concept built around cocoa butter as the nourishing solid base.",
 
-        resultCard.classList.remove(
-            "hidden"
-        );
+            category:
+                "Solid Body Care",
+
+            benefit:
+                "Designed around a rich, nourishing balm texture for intensive moisturising care."
+
+        };
 
     }
 
 
     /*
-    Update progress
+    ========================================================
+    DEFAULT
+    ========================================================
     */
 
-    updateMissionProgress();
+    return {
 
+        type: "Nail & Cuticle Oil",
 
-    /*
-    Scroll to result
-    */
+        name:
+            "Aura Botanical Nail Oil",
 
-    setTimeout(() => {
+        icon:
+            "✨",
 
-        if (resultCard) {
+        description:
+            "A botanical nail and cuticle oil concept created from your selected ingredients.",
 
-            resultCard.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
+        category:
+            "Nail Care",
 
-        }
+        benefit:
+            "Designed around a lightweight botanical oil experience for nail and cuticle care."
 
-    }, 200);
-
-
-    /*
-    Reveal reflection
-    */
-
-    setTimeout(() => {
-
-        const reflection =
-            document.getElementById(
-                "reflection"
-            );
-
-
-        if (reflection) {
-
-            reflection.classList.remove(
-                "hidden"
-            );
-
-        }
-
-    }, 800);
+    };
 
 }
 
 
 /* =========================================================
-   GENERATE FORMULA RESULT
+   GENERATE PRODUCT RESULT
 ========================================================= */
 
 function generateFormulaResult() {
+
+    const product =
+        determineProduct();
+
+
+    /*
+    Existing result elements
+    */
 
     const identityTitle =
         document.getElementById(
@@ -1026,48 +1016,161 @@ function generateFormulaResult() {
         );
 
 
-    const hasTamarind =
-        selectedIngredients.some(
-            ingredient =>
-                ingredient.id === "tamarind"
+    /*
+    ========================================================
+    PRODUCT RESULT CONTAINER
+    ========================================================
+    */
+
+    const resultCard =
+        document.getElementById(
+            "resultCard"
         );
 
 
-    const hasCarrier =
-        selectedIngredients.some(
-            ingredient =>
-                ingredient.id === "almond"
-        );
+    if (resultCard) {
+
+        /*
+        Check if product result already exists
+        */
+
+        let productResult =
+            document.getElementById(
+                "dynamicProductResult"
+            );
 
 
-    const hasAntioxidant =
-        selectedIngredients.some(
-            ingredient =>
-                ingredient.id === "vitaminE"
-        );
+        /*
+        Create it if HTML doesn't already have it
+        */
 
+        if (!productResult) {
+
+            productResult =
+                document.createElement(
+                    "div"
+                );
+
+
+            productResult.id =
+                "dynamicProductResult";
+
+
+            productResult.className =
+                "dynamic-product-result";
+
+
+            /*
+            Put product result at the beginning
+            */
+
+            resultCard.insertBefore(
+                productResult,
+                resultCard.firstChild
+            );
+
+        }
+
+
+        productResult.innerHTML = `
+
+            <div class="product-result-icon">
+                ${product.icon}
+            </div>
+
+            <span class="ingredient-number">
+                FORMULATION RESULT
+            </span>
+
+            <h2>
+                ${product.name}
+            </h2>
+
+            <p class="product-type">
+                ${product.type}
+            </p>
+
+            <p>
+                ${product.description}
+            </p>
+
+            <div class="product-profile">
+
+                <div>
+                    <strong>Product Category</strong>
+                    <span>${product.category}</span>
+                </div>
+
+                <div>
+                    <strong>Formula Cost</strong>
+                    <span>RM${calculateTotal().toFixed(2)}</span>
+                </div>
+
+                <div>
+                    <strong>Ingredients</strong>
+                    <span>${selectedIngredients.length}</span>
+                </div>
+
+            </div>
+
+            <div class="product-benefit">
+
+                <strong>Formula Concept</strong>
+
+                <p>
+                    ${product.benefit}
+                </p>
+
+            </div>
+
+            <div class="selected-formula-list">
+
+                <strong>Your Formula</strong>
+
+                ${selectedIngredients.map(
+                    ingredient => `
+                        <div>
+                            ${ingredient.icon}
+                            ${ingredient.name}
+                        </div>
+                    `
+                ).join("")}
+
+            </div>
+
+        `;
+
+    }
+
+
+    /*
+    ========================================================
+    FORMULA IDENTITY
+    ========================================================
+    */
 
     let identity =
         "Botanical Formulator";
 
 
     let description =
-        "You created a thoughtful botanical formulation by balancing ingredient roles, client needs and budget.";
+        "You created a thoughtful botanical formulation by balancing ingredients, client needs and budget.";
 
 
     let auraMessage =
-        "Excellent formulation thinking! You considered the purpose of each ingredient instead of choosing randomly.";
+        "Excellent formulation thinking! You considered the purpose of your ingredients instead of choosing randomly.";
 
 
     /*
-    =========================================================
-    SUSTAINABILITY IDENTITY
-    =========================================================
+    ========================================================
+    SUSTAINABILITY CLIENT
+    ========================================================
     */
 
     if (
-        selectedClient === "Sustainability First" &&
-        hasTamarind
+        selectedClient ===
+            "Sustainability First" &&
+        hasIngredient("tamarind")
     ) {
 
         identity =
@@ -1075,33 +1178,28 @@ function generateFormulaResult() {
 
 
         description =
-            "Your formulation demonstrates a strong sustainability mindset by incorporating an upcycled ingredient while keeping the formula within budget.";
+            "Your formulation demonstrates a strong sustainability mindset by incorporating an upcycled ingredient.";
 
 
         auraMessage =
-            "Excellent! You connected cosmetic innovation with responsible ingredient choices.";
+            "Excellent sustainability thinking! You gave an ingredient a second life while considering the client's needs.";
 
     }
 
 
     /*
-    =========================================================
-    LUXURY IDENTITY
-    =========================================================
+    ========================================================
+    LUXURY CLIENT
+    ========================================================
     */
 
     else if (
-        selectedClient === "Luxury Botanical" &&
+        selectedClient ===
+            "Luxury Botanical" &&
         (
-            selectedIngredients.some(
-                ingredient =>
-                    ingredient.id === "geranium"
-            )
-            ||
-            selectedIngredients.some(
-                ingredient =>
-                    ingredient.id === "vanilla"
-            )
+            hasIngredient("geranium") ||
+            hasIngredient("vanilla") ||
+            hasIngredient("hibiscus")
         )
     ) {
 
@@ -1114,20 +1212,21 @@ function generateFormulaResult() {
 
 
         auraMessage =
-            "Beautiful formulation direction! You considered not only function, but also the sensory identity of the final product.";
+            "Beautiful formulation direction! You considered both function and sensory identity.";
 
     }
 
 
     /*
-    =========================================================
-    LIGHTWEIGHT IDENTITY
-    =========================================================
+    ========================================================
+    LIGHTWEIGHT CLIENT
+    ========================================================
     */
 
     else if (
-        selectedClient === "Lightweight Botanical" &&
-        hasCarrier
+        selectedClient ===
+            "Lightweight Botanical" &&
+        hasIngredient("almond")
     ) {
 
         identity =
@@ -1135,67 +1234,98 @@ function generateFormulaResult() {
 
 
         description =
-            "Your formulation shows a clear understanding of building a lightweight botanical concept around a suitable carrier oil.";
+            "Your formulation shows a clear understanding of building a lightweight botanical concept around a carrier oil.";
 
 
         auraMessage =
-            "Well done! You built your formulation around the client's desired lightweight botanical experience.";
+            "Well done! Your ingredient selection matches the lightweight botanical brief.";
 
     }
 
 
     /*
-    =========================================================
-    ANTIOXIDANT BONUS
-    =========================================================
+    ========================================================
+    PRODUCT-SPECIFIC IDENTITY
+    ========================================================
     */
 
     if (
-        hasAntioxidant &&
-        identity === "Botanical Formulator"
+        product.type ===
+        "Body Scrub"
     ) {
 
         identity =
-            "Formula Strategist";
-
-
-        description =
-            "You demonstrated thoughtful formulation strategy by combining botanical ingredients with an ingredient selected for formulation stability.";
+            "Exfoliation Innovator";
 
 
         auraMessage =
-            "Smart choice! Good formulation thinking means considering both the concept and the technical role of ingredients.";
+            "Great product thinking! You recognised that Coffee Grounds can transform the formulation into an exfoliating scrub concept.";
+
+    }
+
+
+    else if (
+        product.type ===
+        "Body Massage Oil"
+    ) {
+
+        identity =
+            "Aromatic Wellness Creator";
+
+
+        auraMessage =
+            "Excellent combination! Pandan and Mint create a strong aromatic body-care direction.";
+
+    }
+
+
+    else if (
+        product.type ===
+        "Botanical Balm"
+    ) {
+
+        identity =
+            "Balm Alchemist";
+
+
+        auraMessage =
+            "Excellent formulation choice! Cocoa Butter shifts your formulation toward a rich solid balm concept.";
 
     }
 
 
     /*
-    =========================================================
+    ========================================================
     TAMARIND BONUS
-    =========================================================
+    ========================================================
     */
 
     if (
-        hasTamarind &&
-        identity === "Botanical Formulator"
+        hasIngredient("tamarind") &&
+        product.type !== "Body Scrub"
     ) {
 
-        identity =
-            "Green Innovator";
+        if (
+            selectedClient ===
+            "Sustainability First"
+        ) {
+
+            identity =
+                "Green Innovator";
+
+        }
 
 
-        description =
-            "You identified an upcycling opportunity and incorporated it into your cosmetic innovation journey.";
-
-
-        auraMessage =
-            "Great sustainability thinking! You gave a discarded material a second life.";
+        auraMessage +=
+            " Tamarind Seed Extract also strengthens the sustainability story of your formulation.";
 
     }
 
 
     /*
-    UPDATE UI
+    ========================================================
+    UPDATE EXISTING UI
+    ========================================================
     */
 
     if (identityTitle) {
@@ -1233,6 +1363,183 @@ function generateFormulaResult() {
 
 
 /* =========================================================
+   ACTIVATE FORMULA
+========================================================= */
+
+function activateFormula() {
+
+    const warning =
+        document.getElementById(
+            "activationWarning"
+        );
+
+
+    /*
+    CHECK CLIENT
+    */
+
+    if (!selectedClient) {
+
+        if (warning) {
+
+            warning.textContent =
+                "Please select a client profile before activating your formulation.";
+
+        }
+
+
+        alert(
+            "Please select a client profile first."
+        );
+
+        return;
+
+    }
+
+
+    /*
+    CHECK INGREDIENTS
+    */
+
+    if (
+        selectedIngredients.length === 0
+    ) {
+
+        if (warning) {
+
+            warning.textContent =
+                "Please select at least one ingredient for your formula.";
+
+        }
+
+
+        alert(
+            "Please select at least one ingredient."
+        );
+
+        return;
+
+    }
+
+
+    /*
+    CHECK BUDGET
+    */
+
+    const total =
+        calculateTotal();
+
+
+    if (total > budget) {
+
+        if (warning) {
+
+            warning.textContent =
+                "Your formulation is over the RM20 budget.";
+
+        }
+
+
+        alert(
+            "Your formulation is over the RM20 budget."
+        );
+
+        return;
+
+    }
+
+
+    /*
+    CLEAR WARNING
+    */
+
+    if (warning) {
+
+        warning.textContent = "";
+
+    }
+
+
+    /*
+    FORMULA ACTIVATED
+    */
+
+    formulaActivated = true;
+
+
+    /*
+    GENERATE PRODUCT
+    */
+
+    generateFormulaResult();
+
+
+    /*
+    SHOW RESULT CARD
+    */
+
+    const resultCard =
+        document.getElementById(
+            "resultCard"
+        );
+
+
+    if (resultCard) {
+
+        resultCard.classList.remove(
+            "hidden"
+        );
+
+    }
+
+
+    updateMissionProgress();
+
+
+    /*
+    SCROLL RESULT
+    */
+
+    setTimeout(() => {
+
+        if (resultCard) {
+
+            resultCard.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }
+
+    }, 250);
+
+
+    /*
+    REVEAL REFLECTION
+    */
+
+    setTimeout(() => {
+
+        const reflection =
+            document.getElementById(
+                "reflection"
+            );
+
+
+        if (reflection) {
+
+            reflection.classList.remove(
+                "hidden"
+            );
+
+        }
+
+    }, 800);
+
+}
+
+
+/* =========================================================
    REFLECTION
 ========================================================= */
 
@@ -1250,6 +1557,8 @@ function reflect(choice) {
 
     if (!reflectionText) {
 
+        updateMissionProgress();
+
         return;
 
     }
@@ -1263,7 +1572,7 @@ function reflect(choice) {
         case "Reduce environmental impact":
 
             message =
-                "Great reflection. Consider increasing upcycled ingredients, reducing unnecessary fragrance components and thinking about responsible sourcing.";
+                "Great reflection. Consider increasing upcycled ingredients, reducing unnecessary components and thinking about responsible sourcing.";
 
             break;
 
@@ -1271,7 +1580,7 @@ function reflect(choice) {
         case "Improve formulation strategy":
 
             message =
-                "Good thinking. Revisit the functional role of every ingredient and ask whether each component contributes something meaningful to the final formula.";
+                "Good thinking. Revisit the functional role of every ingredient and ask whether each component contributes something meaningful.";
 
             break;
 
@@ -1279,7 +1588,7 @@ function reflect(choice) {
         case "Reduce production cost":
 
             message =
-                "Excellent commercial thinking. Look for ingredients that provide multiple benefits while keeping the total formulation cost within the target budget.";
+                "Excellent commercial thinking. Look for ingredients that provide multiple benefits while keeping the formulation within budget.";
 
             break;
 
@@ -1287,7 +1596,7 @@ function reflect(choice) {
         case "Better match the client":
 
             message =
-                "Strong formulation mindset. The best formula is not simply the one with the most attractive ingredients — it is the one that best solves the client's needs.";
+                "Strong formulation mindset. The best formula is the one that solves the client's needs while maintaining a clear product concept.";
 
             break;
 
@@ -1309,16 +1618,8 @@ function reflect(choice) {
     );
 
 
-    /*
-    Update progress to complete
-    */
-
     updateMissionProgress();
 
-
-    /*
-    Scroll reflection result into view
-    */
 
     setTimeout(() => {
 
@@ -1354,7 +1655,7 @@ function updateMissionProgress() {
 
 
     /*
-    Client selected
+    CLIENT
     */
 
     if (selectedClient) {
@@ -1365,7 +1666,7 @@ function updateMissionProgress() {
 
 
     /*
-    Ingredients selected
+    INGREDIENT
     */
 
     if (
@@ -1378,19 +1679,10 @@ function updateMissionProgress() {
 
 
     /*
-    Formula activated
+    FORMULA
     */
 
-    const resultCard =
-        document.getElementById(
-            "resultCard"
-        );
-
-
-    if (
-        resultCard &&
-        !resultCard.classList.contains("hidden")
-    ) {
+    if (formulaActivated) {
 
         progress += 25;
 
@@ -1398,7 +1690,7 @@ function updateMissionProgress() {
 
 
     /*
-    Reflection completed
+    REFLECTION
     */
 
     if (reflectionChoice) {
@@ -1409,7 +1701,7 @@ function updateMissionProgress() {
 
 
     /*
-    Update progress bar
+    UPDATE BAR
     */
 
     if (progressBar) {
@@ -1421,7 +1713,7 @@ function updateMissionProgress() {
 
 
     /*
-    Update percentage
+    UPDATE TEXT
     */
 
     if (progressText) {
@@ -1430,6 +1722,122 @@ function updateMissionProgress() {
             `${progress}%`;
 
     }
+
+}
+
+
+/* =========================================================
+   RESET MISSION
+========================================================= */
+
+function resetMission() {
+
+    selectedIngredients = [];
+
+    selectedClient = null;
+
+    reflectionChoice = null;
+
+    formulaActivated = false;
+
+
+    /*
+    Reset client cards
+    */
+
+    document
+        .querySelectorAll(".client-card")
+        .forEach(card => {
+
+            card.classList.remove(
+                "selected"
+            );
+
+        });
+
+
+    /*
+    Reset ingredient cards
+    */
+
+    document
+        .querySelectorAll(".ingredient")
+        .forEach(card => {
+
+            card.classList.remove(
+                "used",
+                "flipped"
+            );
+
+        });
+
+
+    /*
+    Hide sustainability
+    */
+
+    const sustainability =
+        document.getElementById(
+            "sustainabilityCard"
+        );
+
+
+    if (sustainability) {
+
+        sustainability.classList.add(
+            "hidden"
+        );
+
+    }
+
+
+    /*
+    Hide result
+    */
+
+    const resultCard =
+        document.getElementById(
+            "resultCard"
+        );
+
+
+    if (resultCard) {
+
+        resultCard.classList.add(
+            "hidden"
+        );
+
+    }
+
+
+    /*
+    Hide reflection
+    */
+
+    const reflection =
+        document.getElementById(
+            "reflection"
+        );
+
+
+    if (reflection) {
+
+        reflection.classList.add(
+            "hidden"
+        );
+
+    }
+
+
+    updateFormula();
+
+    updateMissionProgress();
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 
 }
 
