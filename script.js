@@ -16,7 +16,7 @@ const ingredients = [
         name: "Sweet Almond Oil",
         icon: "🌰",
         cost: 3.00,
-        clue: "Rich in essential fatty acids, Vitamin A, and Vitamin E. It deeply moisturizes dry skin, soothes irritation (such as eczema or psoriasis), and improves skin tone and complexion.",
+        clue: "It deeply moisturizes dry skin, soothes irritation, and improves skin tone and complexion.",
         role: "Primary carrier Oil"
     },
 
@@ -25,8 +25,8 @@ const ingredients = [
         name: "hibiscus sabdariffa Oil",
         icon: "🌺",
         cost: 3.50,
-        clue: "Often called the natural botox plant oil, it is packed with antioxidants, natural alpha-hydroxy acids (AHAs), and omega-6 fatty acids. It boosts skin elasticity, encourages cellular turnover, and combats signs of aging.",
-        role: "Serves as a premium anti-aging active and brightening agent in facial oils, anti-aging serums, and luxury moisturizers."
+        clue: "It is packed with antioxidants, natural alpha-hydroxy acids (AHAs), and omega-6 fatty acids. It boosts skin elasticity, encourages cellular turnover, and combats signs of aging.",
+        role: "Serves as a premium anti-aging active and brightening agent."
     },
 
     {
@@ -34,8 +34,8 @@ const ingredients = [
         name: "Gromwell Root Powder",
         icon: "🌿",
         cost: 2.50,
-        clue: "Highly revered in traditional herbal skincare for its potent anti-inflammatory, antibacterial, and wound-healing properties. It calms acne, reduces redness, and naturally imparts a beautiful pink-to-red hue to formulations.",
-        role: "Acts as a soothing agent and natural colorant in acne treatments, healing salves, and calming balms."
+        clue: "Potent anti-inflammatory, antibacterial, and wound-healing properties. It naturally imparts a beautiful pink-to-red hue to formulations.",
+        role: "Acts as a soothing agent and natural colorant."
     },
 
     {
@@ -43,8 +43,8 @@ const ingredients = [
         name: "Tamarind Seed Extract",
         icon: "♻️",
         cost: 1.50,
-        clue: "An upcycled ingredient that gives a discarded material a second life. Contains polysaccharides that mimic (and some studies suggest, outperform) Hyaluronic Acid. It binds moisture to the skin, plumps out fine lines, and significantly improves skin hydration and texture.",
-        role: "Upcycled Ingredient. Functions as a powerful hydrating active in water-based formulations like serums, toners, and gel moisturizers."
+        clue: "An upcycled ingredient that gives a discarded material a second life. Contains polysaccharides that mimic Hyaluronic Acid.",
+        role: "Upcycled Ingredient. Functions as a powerful hydrating active in water-based formulations."
     },
 
     {
@@ -53,7 +53,7 @@ const ingredients = [
         icon: "✨",
         cost: 2.00,
         clue: "A highly stable, oil-soluble antioxidant. It protects skin cells from free radical damage caused by UV rays and pollution while helping the skin retain its natural moisture.",
-        role: "Serves as an anti-aging active and skin protectant. It also acts as an antioxidant for the formulation, extending the shelf life of the botanical oils by preventing them from going rancid."
+        role: "Serves as an anti-aging active and skin protectant."
     },
 
     {
@@ -61,8 +61,8 @@ const ingredients = [
         name: "Rose Geranium",
         icon: "🌹",
         cost: 4.00,
-        clue: "Balances sebum (oil) production, acts as a natural astringent to tighten skin tissues, and promotes cell regeneration while offering a deeply relaxing, balancing floral aroma.",
-        role: "Serves as a balancing active and natural fragrance for oily, dry, or combination skincare products."
+        clue: "A natural astringent to tighten skin tissues, and promotes cell regeneration while offering a deeply relaxing, balancing floral aroma.",
+        role: "Serves as a balancing active and natural fragrance."
     },
 
     {
@@ -70,8 +70,8 @@ const ingredients = [
         name: "Vanilla",
         icon: "🍦",
         cost: 3.00,
-        clue: "Rich in antioxidants that reverse skin damage. Its sweet, warm scent is known for its therapeutic, stress-relieving properties on the nervous system.",
-        role: "Functions as a fragrance agent and soothing aromatic in lip cosmetics, body creams, and spa products."
+        clue: "Sweet, warm scent is known for its therapeutic, stress-relieving properties on the nervous system.",
+        role: "Functions as a fragrance agent and soothing aroma."
     },
 
 
