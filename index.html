@@ -1,217 +1,676 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aura Formulation Quest</title>
-<link rel="stylesheet" href="style.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aura Formulation Quest</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-<section id="landing" class="hero">
+<!-- =========================
+     LANDING PAGE
+========================= -->
 
-<div class="overlay"></div>
+<section id="landing" class="landing">
 
-<div class="hero-content">
+    <div class="stars"></div>
 
-<div class="hero-icon">⚗️</div>
+    <div class="landing-content">
 
-<h1>Aura Formulation Quest</h1>
+        <div class="aura-orb">
+            <span>✦</span>
+        </div>
 
-<p>Think • Discover • Formulate • Innovate</p>
+        <p class="eyebrow">AURA LUXE AI LAB</p>
 
-<button onclick="startMission()">Begin Mission</button>
+        <h1>Aura<br><span>Formulation Quest</span></h1>
 
-</div>
+        <p class="landing-subtitle">
+            From Ingredient Discovery<br>
+            to Cosmetic Innovation
+        </p>
+
+        <button class="primary-button" onclick="startMission()">
+            Begin Mission
+            <span>→</span>
+        </button>
+
+        <p class="landing-note">
+            Mission 01 · Botanical Nail & Cuticle Oil
+        </p>
+
+    </div>
 
 </section>
-.hero-icon{
 
-font-size:80px;
 
-margin-bottom:20px;
+<!-- =========================
+     MAIN GAME
+========================= -->
 
-animation:float 3s infinite;
+<main id="game" class="game hidden">
 
-}  
+    <!-- TOP BAR -->
 
-<section id="game" class="hidden">
+    <header class="topbar">
 
-<div class="container">
+        <div class="brand">
+            <div class="brand-symbol">A</div>
 
-<div class="card mission">
-<h2>Mission #01</h2>
-<p>Create a botanical nail & cuticle oil that matches your client's needs while staying within budget.</p>
-</div>
+            <div>
+                <strong>AURA LUXE</strong>
+                <small>AI LAB</small>
+            </div>
+        </div>
 
-<div class="card">
-<h2>Select Your Client</h2>
+        <div class="mission-progress">
 
-<div class="clients">
+            <span>MISSION 01</span>
 
-<div class="client" onclick="selectClient(this,'Lightweight botanical')">
-<h3>Client A</h3>
-<p>Lightweight feel</p>
-</div>
+            <div class="progress-track">
+                <div id="missionProgress"></div>
+            </div>
 
-<div class="client" onclick="selectClient(this,'Sustainability')">
-<h3>Client B</h3>
-<p>Eco-conscious</p>
-</div>
+            <span id="progressText">0%</span>
 
-<div class="client" onclick="selectClient(this,'Luxury botanical')">
-<h3>Client C</h3>
-<p>Premium experience</p>
-</div>
+        </div>
 
-</div>
+    </header>
 
-<p id="clientResult"></p>
 
-</div>
+    <div class="page-container">
 
-<div class="card">
 
-<h2>Digital Ingredient Vault</h2>
+        <!-- =========================
+             MISSION INTRO
+        ========================== -->
 
-<div class="ingredients" id="ingredients"></div>
+        <section class="section">
 
-</div>
+            <div class="mission-card">
 
-<div class="card">
+                <div class="mission-label">
+                    FORMULATION MISSION #01
+                </div>
 
-<h2>🔮 Formulation Core</h2>
+                <h2>Botanical Nail<br>& Cuticle Oil</h2>
 
-<div class="beaker" id="beaker">🧪</div>
+                <p>
+                    Your client wants a botanical nail & cuticle oil
+                    that feels luxurious, considers sustainability,
+                    and stays within budget.
+                </p>
 
-<p id="selectedList">No ingredients selected.</p>
+                <div class="mission-goals">
 
-<div class="budget">
+                    <div>
+                        <span>01</span>
+                        Discover ingredients
+                    </div>
 
-<div class="budget-top">
-<span>Budget</span>
-<span id="budgetText">RM0 / RM20</span>
-</div>
+                    <div>
+                        <span>02</span>
+                        Make smart decisions
+                    </div>
 
-<div class="progress">
-<div class="fill" id="fill"></div>
-</div>
+                    <div>
+                        <span>03</span>
+                        Create your formula
+                    </div>
 
-</div>
+                </div>
 
-</div>
+            </div>
 
-<div class="card hidden" id="sustainabilityCard">
 
-<h2>♻ Sustainability Boost</h2>
+            <!-- AURA STUDY BUDDY -->
 
-<p>You selected Tamarind Seed Extract.</p>
+            <div class="aura-message">
 
-<div class="flow">
+                <div class="aura-avatar">
+                    ✦
+                </div>
 
-<div class="step">🗑️<span>Waste</span></div>
+                <div>
+                    <strong>Aura Study Buddy</strong>
 
-<div class="arrow">→</div>
+                    <p>
+                        Welcome, Formulator! Every ingredient has a purpose.
+                        Let's discover the best solution together.
+                    </p>
+                </div>
 
-<div class="step">♻️<span>Upcycling</span></div>
+            </div>
 
-<div class="arrow">→</div>
+        </section>
 
-<div class="step">✨<span>Innovation</span></div>
 
-</div>
-.flow{
 
-display:flex;
+        <!-- =========================
+             CLIENT PROFILE
+        ========================== -->
 
-justify-content:center;
+        <section class="section">
 
-align-items:center;
+            <div class="section-heading">
 
-gap:20px;
+                <span class="step-number">01</span>
 
-flex-wrap:wrap;
+                <div>
+                    <p class="section-label">CLIENT ANALYSIS</p>
+                    <h2>Who are you formulating for?</h2>
+                </div>
 
-margin-top:20px;
+            </div>
 
-}
 
-.step{
+            <div class="client-grid">
 
-background:white;
 
-padding:20px;
+                <button class="client-card"
+                    onclick="selectClient(this, 'Lightweight Botanical')">
 
-border-radius:20px;
+                    <div class="client-icon">🌿</div>
 
-box-shadow:0 8px 20px rgba(108,74,182,.12);
+                    <span class="client-number">CLIENT A</span>
 
-text-align:center;
+                    <h3>Lightweight<br>Botanical</h3>
 
-width:120px;
+                    <p>
+                        Prefers a lightweight feel
+                        and subtle botanical experience.
+                    </p>
 
-}
+                    <span class="choose-text">
+                        Select client →
+                    </span>
 
-.step span{
+                </button>
 
-display:block;
 
-margin-top:10px;
 
-font-size:.85rem;
+                <button class="client-card"
+                    onclick="selectClient(this, 'Sustainability First')">
 
-font-weight:600;
+                    <div class="client-icon">♻</div>
 
-}
+                    <span class="client-number">CLIENT B</span>
 
-.arrow{
+                    <h3>Sustainability<br>First</h3>
 
-font-size:28px;
+                    <p>
+                        Values responsible sourcing,
+                        upcycling and minimal fragrance.
+                    </p>
 
-color:#D4AF37;
+                    <span class="choose-text">
+                        Select client →
+                    </span>
 
-}
-<div class="center">
-<button onclick="activateFormula()">Activate Formulation</button>
-</div>
+                </button>
 
-<div class="card hidden" id="resultCard">
 
-<div class="formula-animation">
-<div class="particle p1"></div>
-<div class="particle p2"></div>
-<div class="particle p3"></div>
-<div class="bottle">✨</div>
-</div>
 
-<h2 id="identityTitle"></h2>
+                <button class="client-card"
+                    onclick="selectClient(this, 'Luxury Botanical')">
 
-<p id="identityText"></p>
+                    <div class="client-icon">✦</div>
 
-</div>
+                    <span class="client-number">CLIENT C</span>
 
-<div class="card hidden" id="reflection">
+                    <h3>Luxury<br>Botanical</h3>
 
-<h2>Reflection Challenge</h2>
+                    <p>
+                        Wants a rich botanical concept
+                        with a premium sensory experience.
+                    </p>
 
-<p>What would you improve?</p>
+                    <span class="choose-text">
+                        Select client →
+                    </span>
 
-<div class="reflection-buttons">
-<button onclick="reflect('Reduce environmental impact')">Reduce Impact</button>
-<button onclick="reflect('Improve formulation strategy')">Improve Strategy</button>
-<button onclick="reflect('Reduce cost')">Reduce Cost</button>
-<button onclick="reflect('Better match client preference')">Client Match</button>
-</div>
+                </button>
 
-<p id="reflectionText"></p>
+            </div>
 
-</div>
 
-</div>
+            <div id="clientResult" class="feedback hidden"></div>
 
-</section>
+        </section>
+
+
+
+        <!-- =========================
+             INGREDIENT VAULT
+        ========================== -->
+
+        <section class="section">
+
+            <div class="section-heading">
+
+                <span class="step-number">02</span>
+
+                <div>
+                    <p class="section-label">INGREDIENT DISCOVERY</p>
+
+                    <h2>Explore the Ingredient Vault</h2>
+
+                    <p>
+                        Click an ingredient to reveal its clue,
+                        then decide whether it belongs in your formula.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div id="ingredients" class="ingredient-grid"></div>
+
+
+            <div class="aura-tip">
+
+                <span>✦</span>
+
+                <div>
+
+                    <strong>Aura's Tip</strong>
+
+                    <p>
+                        Don't choose ingredients simply because they sound good.
+                        Think about the client's needs and the role each ingredient plays.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             FORMULATION CORE
+        ========================== -->
+
+        <section class="section">
+
+            <div class="section-heading">
+
+                <span class="step-number">03</span>
+
+                <div>
+                    <p class="section-label">FORMULATION STRATEGY</p>
+                    <h2>Build Your Formulation</h2>
+                </div>
+
+            </div>
+
+
+            <div class="formulation-layout">
+
+
+                <!-- BEAKER -->
+
+                <div class="lab-panel">
+
+                    <div class="lab-glow"></div>
+
+                    <div id="beaker" class="beaker">
+                        <div class="liquid"></div>
+                        <span>⚗</span>
+                    </div>
+
+                    <p class="lab-status">
+                        FORMULATION CORE
+                    </p>
+
+                    <p class="lab-subtitle">
+                        Your selected ingredients will appear here.
+                    </p>
+
+                </div>
+
+
+
+                <!-- SELECTED INGREDIENTS -->
+
+                <div class="formula-panel">
+
+                    <div class="panel-title">
+                        <span>YOUR FORMULA</span>
+                        <span id="ingredientCount">0 ingredients</span>
+                    </div>
+
+                    <div id="selectedList" class="selected-list">
+
+                        <div class="empty-state">
+                            <span>+</span>
+                            <p>
+                                Select ingredients<br>
+                                from the Ingredient Vault
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <!-- BUDGET -->
+
+                    <div class="budget-box">
+
+                        <div class="budget-header">
+
+                            <div>
+                                <span class="small-label">
+                                    FORMULATION BUDGET
+                                </span>
+
+                                <strong>RM20.00</strong>
+                            </div>
+
+                            <strong id="budgetText">
+                                RM0.00
+                            </strong>
+
+                        </div>
+
+
+                        <div class="budget-track">
+
+                            <div id="fill" class="budget-fill"></div>
+
+                        </div>
+
+
+                        <p id="budgetMessage">
+                            You have RM20.00 remaining.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             SUSTAINABILITY
+        ========================== -->
+
+        <section id="sustainabilityCard"
+                 class="section sustainability hidden">
+
+            <div class="sustainability-card">
+
+                <div class="eco-icon">♻</div>
+
+                <p class="section-label">
+                    SUSTAINABILITY BOOST
+                </p>
+
+                <h2>
+                    You discovered an<br>
+                    upcycling opportunity.
+                </h2>
+
+                <p>
+                    Tamarind Seed Extract transforms a discarded
+                    material into an opportunity for cosmetic innovation.
+                </p>
+
+
+                <div class="eco-flow">
+
+                    <div class="eco-step">
+                        <span>01</span>
+                        Waste Material
+                    </div>
+
+                    <div class="eco-arrow">→</div>
+
+                    <div class="eco-step">
+                        <span>02</span>
+                        Upcycling
+                    </div>
+
+                    <div class="eco-arrow">→</div>
+
+                    <div class="eco-step">
+                        <span>03</span>
+                        Innovation
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             ACTIVATE FORMULA
+        ========================== -->
+
+        <section class="activate-section">
+
+            <p class="section-label">
+                READY TO DISCOVER YOUR FORMULA?
+            </p>
+
+            <h2>
+                Bring your formulation<br>
+                to life.
+            </h2>
+
+            <button class="primary-button"
+                    onclick="activateFormula()">
+
+                Activate Formulation
+                <span>✦</span>
+
+            </button>
+
+            <p id="activationWarning" class="warning"></p>
+
+        </section>
+
+
+
+        <!-- =========================
+             FORMULA RESULT
+        ========================== -->
+
+        <section id="resultCard"
+                 class="section result-section hidden">
+
+            <div class="result-card">
+
+                <div class="formula-animation">
+
+                    <div class="particle particle-one"></div>
+                    <div class="particle particle-two"></div>
+                    <div class="particle particle-three"></div>
+
+                    <div class="formula-bottle">
+                        <div class="bottle-cap"></div>
+                        <div class="bottle-body">
+                            <span>AURA</span>
+                            <small>NAIL OIL</small>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <p class="section-label">
+                    FORMULA JOURNEY COMPLETE
+                </p>
+
+                <h2 id="identityTitle">
+                    Green Innovator
+                </h2>
+
+                <p id="identityText"></p>
+
+
+                <div class="achievement">
+
+                    <div class="achievement-icon">
+                        ✦
+                    </div>
+
+                    <div>
+                        <span>YOUR FORMULATION IDENTITY</span>
+
+                        <strong id="badgeName">
+                            Green Innovator
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="aura-message result-message">
+
+                    <div class="aura-avatar">
+                        ✦
+                    </div>
+
+                    <div>
+
+                        <strong>Aura Study Buddy</strong>
+
+                        <p id="auraResultMessage">
+                            Excellent formulation thinking!
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             REFLECTION
+        ========================== -->
+
+        <section id="reflection"
+                 class="section reflection-section hidden">
+
+            <div class="section-heading">
+
+                <span class="step-number">04</span>
+
+                <div>
+                    <p class="section-label">
+                        REFLECTION & ITERATION
+                    </p>
+
+                    <h2>
+                        Can you make it better?
+                    </h2>
+
+                    <p>
+                        Great formulators don't stop at the first version.
+                        Choose one aspect you would improve.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="reflection-grid">
+
+                <button onclick="reflect('Reduce environmental impact')">
+                    <span>♻</span>
+                    <strong>Reduce environmental impact</strong>
+                    <small>Think greener.</small>
+                </button>
+
+                <button onclick="reflect('Improve formulation strategy')">
+                    <span>⚗</span>
+                    <strong>Improve formulation strategy</strong>
+                    <small>Think smarter.</small>
+                </button>
+
+                <button onclick="reflect('Reduce production cost')">
+                    <span>RM</span>
+                    <strong>Reduce production cost</strong>
+                    <small>Think commercially.</small>
+                </button>
+
+                <button onclick="reflect('Better match the client')">
+                    <span>♡</span>
+                    <strong>Better match the client</strong>
+                    <small>Think personally.</small>
+                </button>
+
+            </div>
+
+
+            <div id="reflectionText"
+                 class="reflection-result hidden">
+            </div>
+
+
+            <div class="complete-message">
+
+                <span>✦</span>
+
+                <div>
+
+                    <strong>
+                        Digital journey complete.
+                    </strong>
+
+                    <p>
+                        Now take your formulation knowledge
+                        into the real laboratory.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="footer-brand">
+            AURA LUXE AI LAB
+        </div>
+
+        <p>
+            Think · Choose · Formulate · Innovate
+        </p>
+
+    </footer>
+
+</main>
+
 
 <script src="script.js"></script>
 
