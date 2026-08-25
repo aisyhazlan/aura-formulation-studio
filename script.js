@@ -21,11 +21,11 @@ const ingredients = [
     },
 
     {
-        id: "hibiscus sabdariffa",
+        id: "hibiscus",
         name: "hibiscus sabdariffa Oil",
         icon: "🌺",
         cost: 3.50,
-        clue: "Often called the "natural botox plant" oil, it is packed with antioxidants, natural alpha-hydroxy acids (AHAs), and omega-6 fatty acids. It boosts skin elasticity, encourages cellular turnover, and combats signs of aging.",
+        clue: "Often called the natural botox plant oil, it is packed with antioxidants, natural alpha-hydroxy acids (AHAs), and omega-6 fatty acids. It boosts skin elasticity, encourages cellular turnover, and combats signs of aging.",
         role: "Serves as a premium anti-aging active and brightening agent in facial oils, anti-aging serums, and luxury moisturizers."
     },
 
