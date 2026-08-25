@@ -5,34 +5,27 @@
 }
 
 :root {
+    --purple-dark: #171026;
+    --purple: #33205f;
+    --purple-light: #7554ad;
 
-    /* =========================
-       AURA LILAC PALETTE
-    ========================= */
+    --gold: #c9a64b;
+    --gold-light: #f0d58a;
 
-    --purple-dark: #6F5A8E;
-    --purple: #9278B8;
-    --purple-light: #B8A1D6;
-
-    --gold: #C9A64B;
-    --gold-light: #F0D58A;
-
-    --cream: #FAF8F3;
-    --white: #FFFFFF;
+    --cream: #faf8f3;
+    --white: #ffffff;
 
     --text: #292332;
-    --muted: #77717F;
+    --muted: #77717f;
 
-    --border: #E8E2ED;
+    --border: #e8e2ed;
 
-    --green: #5C896A;
+    --green: #5c896a;
 }
-
 
 html {
     scroll-behavior: smooth;
 }
-
 
 body {
     font-family: "DM Sans", sans-serif;
@@ -41,11 +34,9 @@ body {
     line-height: 1.6;
 }
 
-
 button {
     font-family: inherit;
 }
-
 
 .hidden {
     display: none !important;
@@ -57,21 +48,19 @@ button {
 ========================================================= */
 
 .landing {
-
     min-height: 100vh;
 
     background:
         radial-gradient(
             circle at 50% 35%,
-            #B8A1D6 0%,
+            #503485 0%,
             transparent 28%
         ),
-
         linear-gradient(
             135deg,
-            #66527F,
-            #80699F 55%,
-            #5D4A73
+            #120c20,
+            #24153f 55%,
+            #100b19
         );
 
     color: white;
@@ -87,40 +76,33 @@ button {
     position: relative;
 }
 
-
 .landing::before,
 .landing::after {
-
     content: "";
 
     position: absolute;
 
     border-radius: 50%;
 
-    border:
-        1px solid
-        rgba(240, 213, 138, 0.2);
+    border: 1px solid rgba(
+        240,
+        213,
+        138,
+        0.2
+    );
 }
-
 
 .landing::before {
-
     width: 600px;
     height: 600px;
-
 }
-
 
 .landing::after {
-
     width: 900px;
     height: 900px;
-
 }
 
-
 .landing-content {
-
     position: relative;
 
     z-index: 2;
@@ -128,12 +110,9 @@ button {
     max-width: 800px;
 
     padding: 40px 25px;
-
 }
 
-
 .aura-orb {
-
     width: 100px;
     height: 100px;
 
@@ -152,31 +131,37 @@ button {
     background:
         radial-gradient(
             circle,
-            var(--purple-light),
-            var(--purple)
+            #7554ad,
+            #33205f
         );
 
-    border:
-        1px solid
-        rgba(240, 213, 138, 0.6);
+    border: 1px solid rgba(
+        240,
+        213,
+        138,
+        0.6
+    );
 
     box-shadow:
-
-        0 0 40px
-        rgba(184, 161, 214, 0.7),
-
-        0 0 80px
-        rgba(201, 166, 75, 0.15);
+        0 0 40px rgba(
+            117,
+            84,
+            173,
+            0.7
+        ),
+        0 0 80px rgba(
+            201,
+            166,
+            75,
+            0.15
+        );
 
     animation:
         floating 4s ease-in-out infinite;
-
 }
-
 
 .eyebrow,
 .section-label {
-
     letter-spacing: 0.18em;
 
     font-size: 11px;
@@ -184,44 +169,39 @@ button {
     font-weight: 700;
 
     color: var(--gold);
-
 }
 
-
 .landing h1 {
-
-    font-family: "Playfair Display", serif;
+    font-family:
+        "Playfair Display",
+        serif;
 
     font-size:
-        clamp(48px, 8vw, 90px);
+        clamp(
+            48px,
+            8vw,
+            90px
+        );
 
     line-height: 0.95;
 
-    margin: 15px 0 25px;
-
+    margin:
+        15px 0 25px;
 }
-
 
 .landing h1 span {
-
     color: var(--gold-light);
-
 }
-
 
 .landing-subtitle {
-
     font-size: 17px;
 
-    color: #E8E0ED;
+    color: #d8d0e3;
 
     margin-bottom: 35px;
-
 }
 
-
 .primary-button {
-
     border: none;
 
     background:
@@ -231,9 +211,10 @@ button {
             var(--gold)
         );
 
-    color: #4A3A59;
+    color: #24172f;
 
-    padding: 16px 28px;
+    padding:
+        16px 28px;
 
     border-radius: 100px;
 
@@ -247,38 +228,38 @@ button {
 
     box-shadow:
         0 12px 30px
-        rgba(201, 166, 75, 0.2);
-
+        rgba(
+            201,
+            166,
+            75,
+            0.2
+        );
 }
-
 
 .primary-button span {
-
     margin-left: 12px;
-
 }
 
-
 .primary-button:hover {
-
     transform:
         translateY(-3px);
 
     box-shadow:
         0 16px 35px
-        rgba(201, 166, 75, 0.35);
-
+        rgba(
+            201,
+            166,
+            75,
+            0.35
+        );
 }
 
-
 .landing-note {
-
     margin-top: 20px;
 
-    color: #D0C5DB;
+    color: #8d829b;
 
     font-size: 12px;
-
 }
 
 
@@ -287,11 +268,15 @@ button {
 ========================================================= */
 
 .topbar {
-
     height: 78px;
 
     background:
-        rgba(255, 255, 255, 0.96);
+        rgba(
+            255,
+            255,
+            255,
+            0.96
+        );
 
     border-bottom:
         1px solid var(--border);
@@ -300,7 +285,8 @@ button {
 
     align-items: center;
 
-    justify-content: space-between;
+    justify-content:
+        space-between;
 
     padding: 0 6%;
 
@@ -312,35 +298,32 @@ button {
 
     backdrop-filter:
         blur(15px);
-
 }
 
-
 .brand {
-
     display: flex;
 
     align-items: center;
 
     gap: 12px;
-
 }
 
-
 .brand-symbol {
-
     width: 38px;
     height: 38px;
 
     border-radius: 12px;
 
-    background: var(--purple);
+    background:
+        var(--purple);
 
-    color: var(--gold-light);
+    color:
+        var(--gold-light);
 
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
     font-family:
@@ -348,36 +331,29 @@ button {
         serif;
 
     font-size: 21px;
-
 }
 
-
 .brand strong {
-
     display: block;
 
     font-size: 12px;
 
-    letter-spacing: 0.12em;
-
+    letter-spacing:
+        0.12em;
 }
 
-
 .brand small {
-
     display: block;
 
     font-size: 9px;
 
     color: var(--muted);
 
-    letter-spacing: 0.2em;
-
+    letter-spacing:
+        0.2em;
 }
 
-
 .mission-progress {
-
     display: flex;
 
     align-items: center;
@@ -386,30 +362,26 @@ button {
 
     font-size: 10px;
 
-    letter-spacing: 0.1em;
+    letter-spacing:
+        0.1em;
 
     color: var(--muted);
-
 }
 
-
 .progress-track {
-
     width: 150px;
 
     height: 5px;
 
-    background: #EBE6EE;
+    background:
+        #ebe6ee;
 
     border-radius: 20px;
 
     overflow: hidden;
-
 }
 
-
 #missionProgress {
-
     width: 0%;
 
     height: 100%;
@@ -421,8 +393,8 @@ button {
             var(--gold)
         );
 
-    transition: 0.6s ease;
-
+    transition:
+        0.6s ease;
 }
 
 
@@ -431,40 +403,32 @@ button {
 ========================================================= */
 
 .page-container {
-
     max-width: 1150px;
 
     margin: auto;
-
 }
-
 
 .section {
-
     padding:
         80px 30px 20px;
-
 }
 
-
-/* =========================================================
-   MISSION CARD
-========================================================= */
-
 .mission-card {
-
     background:
-
         radial-gradient(
             circle at 90% 10%,
-            rgba(184, 161, 214, 0.4),
+            rgba(
+                117,
+                84,
+                173,
+                0.35
+            ),
             transparent 35%
         ),
-
         linear-gradient(
             135deg,
-            #80699F,
-            #9A80BC
+            #24163e,
+            #36205f
         );
 
     color: white;
@@ -476,12 +440,9 @@ button {
     position: relative;
 
     overflow: hidden;
-
 }
 
-
 .mission-card::after {
-
     content: "✦";
 
     position: absolute;
@@ -493,52 +454,51 @@ button {
     font-size: 180px;
 
     color:
-        rgba(240, 213, 138, 0.06);
-
+        rgba(
+            240,
+            213,
+            138,
+            0.06
+        );
 }
 
-
 .mission-label {
-
     color:
         var(--gold-light);
 
     font-size: 11px;
 
-    letter-spacing: 0.2em;
+    letter-spacing:
+        0.2em;
 
     font-weight: 700;
-
 }
 
-
 .mission-card h2 {
-
     font-family:
         "Playfair Display",
         serif;
 
     font-size:
-        clamp(38px, 5vw, 60px);
+        clamp(
+            38px,
+            5vw,
+            60px
+        );
 
     line-height: 1;
 
-    margin: 18px 0;
-
+    margin:
+        18px 0;
 }
-
 
 .mission-card p {
-
     max-width: 620px;
 
-    color: #EEE7F2;
-
+    color: #d7cedf;
 }
 
-
 .mission-goals {
-
     display: flex;
 
     gap: 30px;
@@ -546,27 +506,21 @@ button {
     margin-top: 35px;
 
     flex-wrap: wrap;
-
 }
-
 
 .mission-goals div {
-
-    color: #F1EAF4;
+    color: #e9e1ef;
 
     font-size: 12px;
-
 }
 
-
 .mission-goals span {
-
-    color: var(--gold);
+    color:
+        var(--gold);
 
     font-weight: 700;
 
     margin-right: 8px;
-
 }
 
 
@@ -575,7 +529,6 @@ button {
 ========================================================= */
 
 .aura-message {
-
     margin-top: 18px;
 
     display: flex;
@@ -589,24 +542,24 @@ button {
     border:
         1px solid var(--border);
 
-    padding: 18px 22px;
+    padding:
+        18px 22px;
 
     border-radius: 18px;
-
 }
 
-
 .aura-avatar {
-
     min-width: 48px;
 
     height: 48px;
 
     border-radius: 50%;
 
-    background: var(--purple);
+    background:
+        var(--purple);
 
-    color: var(--gold-light);
+    color:
+        var(--gold-light);
 
     display: flex;
 
@@ -618,26 +571,25 @@ button {
 
     box-shadow:
         0 5px 20px
-        rgba(146, 120, 184, 0.25);
-
+        rgba(
+            51,
+            32,
+            95,
+            0.2
+        );
 }
-
 
 .aura-message strong {
-
     font-size: 13px;
-
 }
 
-
 .aura-message p {
-
     font-size: 13px;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 
     margin-top: 3px;
-
 }
 
 
@@ -646,7 +598,6 @@ button {
 ========================================================= */
 
 .section-heading {
-
     display: flex;
 
     align-items: flex-start;
@@ -654,19 +605,17 @@ button {
     gap: 18px;
 
     margin-bottom: 35px;
-
 }
 
-
 .step-number {
-
     width: 40px;
     height: 40px;
 
     border:
         1px solid var(--gold);
 
-    color: var(--gold);
+    color:
+        var(--gold);
 
     border-radius: 50%;
 
@@ -679,32 +628,31 @@ button {
     font-size: 12px;
 
     flex-shrink: 0;
-
 }
 
-
 .section-heading h2 {
-
     font-family:
         "Playfair Display",
         serif;
 
     font-size:
-        clamp(30px, 4vw, 45px);
+        clamp(
+            30px,
+            4vw,
+            45px
+        );
 
     line-height: 1.1;
 
-    margin: 5px 0 10px;
-
+    margin:
+        5px 0 10px;
 }
 
-
 .section-heading p:not(.section-label) {
-
-    color: var(--muted);
+    color:
+        var(--muted);
 
     max-width: 650px;
-
 }
 
 
@@ -713,19 +661,18 @@ button {
 ========================================================= */
 
 .client-grid {
-
     display: grid;
 
     grid-template-columns:
-        repeat(3, 1fr);
+        repeat(
+            3,
+            1fr
+        );
 
     gap: 18px;
-
 }
 
-
 .client-card {
-
     text-align: left;
 
     background: white;
@@ -739,15 +686,14 @@ button {
 
     cursor: pointer;
 
-    transition: 0.35s ease;
+    transition:
+        0.35s ease;
 
-    color: var(--text);
-
+    color:
+        var(--text);
 }
 
-
 .client-card:hover {
-
     transform:
         translateY(-5px);
 
@@ -756,49 +702,50 @@ button {
 
     box-shadow:
         0 15px 35px
-        rgba(146, 120, 184, 0.12);
-
+        rgba(
+            51,
+            32,
+            95,
+            0.1
+        );
 }
 
-
 .client-card.selected {
-
     border:
         2px solid var(--gold);
 
-    background: #FFFDF6;
+    background:
+        #fffdf6;
 
     box-shadow:
         0 15px 35px
-        rgba(201, 166, 75, 0.15);
-
+        rgba(
+            201,
+            166,
+            75,
+            0.15
+        );
 }
 
-
 .client-icon {
-
     font-size: 35px;
 
     margin-bottom: 20px;
-
 }
-
 
 .client-number {
-
     font-size: 10px;
 
-    color: var(--gold);
+    color:
+        var(--gold);
 
-    letter-spacing: 0.16em;
+    letter-spacing:
+        0.16em;
 
     font-weight: 700;
-
 }
 
-
 .client-card h3 {
-
     font-family:
         "Playfair Display",
         serif;
@@ -807,97 +754,81 @@ button {
 
     line-height: 1.1;
 
-    margin: 10px 0;
-
+    margin:
+        10px 0;
 }
-
 
 .client-card p {
-
     font-size: 13px;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 
     min-height: 65px;
-
 }
 
-
 .choose-text {
-
     display: block;
 
     margin-top: 20px;
 
     font-size: 11px;
 
-    color: var(--purple-light);
+    color:
+        var(--purple-light);
 
     font-weight: 700;
-
 }
 
-
 .feedback {
-
     margin-top: 18px;
 
-    padding: 16px 20px;
+    padding:
+        16px 20px;
 
-    background: #F1ECF8;
+    background:
+        #f1edf9;
 
     border-radius: 15px;
 
-    color: var(--purple);
+    color:
+        var(--purple);
 
     font-size: 13px;
-
 }
 
 
 /* =========================================================
    INGREDIENTS
-   EXTENDED CLUE CARD
+   PANJANG +95px
 ========================================================= */
 
 .ingredient-grid {
-
     display: grid;
 
     grid-template-columns:
-        repeat(4, 1fr);
+        repeat(
+            4,
+            1fr
+        );
 
     gap: 16px;
-
 }
 
-
 .ingredient {
-
-    /*
-       ORIGINAL:
-       min-height: 235px;
-
-       UPDATED:
-       approx. +5cm visual height
-    */
-
-    min-height: 365px;
+    min-height: 330px;
 
     perspective: 1000px;
 
     cursor: pointer;
-
 }
 
-
 .ingredient-inner {
-
     width: 100%;
 
     height: 100%;
 
-    min-height: 365px;
+    min-height: 330px;
 
     position: relative;
 
@@ -906,22 +837,16 @@ button {
 
     transform-style:
         preserve-3d;
-
 }
-
 
 .ingredient.flipped
 .ingredient-inner {
-
     transform:
         rotateY(180deg);
-
 }
-
 
 .ingredient-front,
 .ingredient-back {
-
     position: absolute;
 
     inset: 0;
@@ -931,159 +856,133 @@ button {
 
     border-radius: 22px;
 
-    padding: 30px;
+    padding: 25px;
 
     border:
         1px solid var(--border);
 
     background: white;
-
 }
-
 
 .ingredient-front {
-
     display: flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
-    justify-content: center;
-
+    justify-content:
+        center;
 }
 
-
 .ingredient-back {
-
     transform:
         rotateY(180deg);
 
     display: flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
-    justify-content: flex-start;
+    justify-content:
+        flex-start;
 
     background:
         linear-gradient(
             135deg,
-            var(--purple),
-            var(--purple-light)
+            #33205f,
+            #503484
         );
 
     color: white;
 
-    /*
-       Prevent long clues from
-       overflowing the card.
-    */
-
     overflow-y: auto;
 
-    scrollbar-width: thin;
-
-    scrollbar-color:
-        rgba(255,255,255,0.4)
-        transparent;
-
+    padding:
+        28px 25px;
 }
 
 
-/* Webkit scrollbar */
-
-.ingredient-back::-webkit-scrollbar {
-
-    width: 5px;
-
-}
-
-
-.ingredient-back::-webkit-scrollbar-track {
-
-    background:
-        transparent;
-
-}
-
-
-.ingredient-back::-webkit-scrollbar-thumb {
-
-    background:
-        rgba(255,255,255,0.35);
-
-    border-radius: 20px;
-
-}
-
+/* =========================================================
+   INGREDIENT ICON
+========================================================= */
 
 .ingredient-icon {
-
     font-size: 42px;
 
     margin-bottom: 18px;
-
 }
 
+
+/* =========================================================
+   INGREDIENT NUMBER
+========================================================= */
 
 .ingredient-number {
-
     font-size: 9px;
 
-    color: var(--gold);
+    color:
+        var(--gold);
 
-    letter-spacing: 0.15em;
-
+    letter-spacing:
+        0.15em;
 }
 
 
-.ingredient h3 {
+/* =========================================================
+   INGREDIENT TITLE
+========================================================= */
 
+.ingredient h3 {
     font-family:
         "Playfair Display",
         serif;
 
     font-size: 21px;
 
-    margin: 7px 0;
-
+    margin:
+        7px 0;
 }
-
 
 .ingredient-front p {
-
-    color: var(--muted);
+    color:
+        var(--muted);
 
     font-size: 11px;
-
 }
 
+
+/* =========================================================
+   INGREDIENT CLUE
+========================================================= */
 
 .ingredient-back p {
+    font-size: 13px;
 
-    font-size: 12px;
+    color:
+        #e6deeb;
+
+    margin-bottom: 16px;
 
     line-height: 1.6;
-
-    color: #F0EAF4;
-
-    margin-bottom: 14px;
-
 }
 
 
-.ingredient-back h3 {
-
-    color: white;
-
-}
-
+/* =========================================================
+   ADD BUTTON
+========================================================= */
 
 .add-button {
-
     border:
         1px solid
-        rgba(240, 213, 138, 0.5);
+        rgba(
+            240,
+            213,
+            138,
+            0.5
+        );
 
-    background: transparent;
+    background:
+        transparent;
 
     color:
         var(--gold-light);
@@ -1099,33 +998,29 @@ button {
     font-size: 11px;
 
     margin-top: auto;
-
 }
 
-
 .add-button:hover {
-
     background:
         var(--gold);
 
     color:
         var(--purple-dark);
-
 }
 
+
+/* =========================================================
+   USED INGREDIENT
+========================================================= */
 
 .ingredient.used
 .ingredient-front {
-
     border:
         2px solid var(--gold);
-
 }
-
 
 .ingredient.used
 .ingredient-front::after {
-
     content:
         "✓ ADDED";
 
@@ -1137,52 +1032,48 @@ button {
 
     font-size: 8px;
 
-    color: var(--gold);
+    color:
+        var(--gold);
 
     font-weight: 700;
-
 }
 
 
-.aura-tip {
+/* =========================================================
+   AURA TIP
+========================================================= */
 
+.aura-tip {
     margin-top: 20px;
 
     padding: 20px;
 
-    background: #F4F0FA;
+    background:
+        #f4f0fa;
 
     border-radius: 18px;
 
     display: flex;
 
     gap: 15px;
-
 }
-
 
 .aura-tip > span {
-
-    color: var(--gold);
+    color:
+        var(--gold);
 
     font-size: 25px;
-
 }
-
 
 .aura-tip strong {
-
     font-size: 12px;
-
 }
 
-
 .aura-tip p {
-
-    color: var(--muted);
+    color:
+        var(--muted);
 
     font-size: 12px;
-
 }
 
 
@@ -1191,33 +1082,27 @@ button {
 ========================================================= */
 
 .formulation-layout {
-
     display: grid;
 
     grid-template-columns:
         1fr 1fr;
 
     gap: 20px;
-
 }
 
-
 .lab-panel {
-
     min-height: 450px;
 
     background:
-
         radial-gradient(
             circle at 50% 45%,
-            #B8A1D6,
+            #5e3f8e,
             transparent 30%
         ),
-
         linear-gradient(
             145deg,
-            var(--purple-dark),
-            var(--purple)
+            #171026,
+            #33205f
         );
 
     border-radius: 28px;
@@ -1228,19 +1113,18 @@ button {
 
     flex-direction: column;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    align-items: center;
+    align-items:
+        center;
 
     overflow: hidden;
 
     position: relative;
-
 }
 
-
 .beaker {
-
     width: 180px;
 
     height: 180px;
@@ -1251,42 +1135,54 @@ button {
 
     display: flex;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    align-items: center;
+    align-items:
+        center;
 
     font-size: 65px;
 
-    color: var(--gold-light);
+    color:
+        var(--gold-light);
 
     background:
-
         radial-gradient(
             circle,
-            var(--purple-light),
-            var(--purple)
+            #7554ad,
+            #33205f
         );
 
     border:
         1px solid
-        rgba(240, 213, 138, 0.4);
+        rgba(
+            240,
+            213,
+            138,
+            0.4
+        );
 
     box-shadow:
-
         0 0 40px
-        rgba(184, 161, 214, 0.7),
-
+        rgba(
+            117,
+            84,
+            173,
+            0.7
+        ),
         0 0 80px
-        rgba(201, 166, 75, 0.2);
+        rgba(
+            201,
+            166,
+            75,
+            0.2
+        );
 
     animation:
         floating 4s ease-in-out infinite;
-
 }
 
-
 .beaker::before {
-
     content: "";
 
     position: absolute;
@@ -1295,18 +1191,20 @@ button {
 
     border:
         1px solid
-        rgba(240, 213, 138, 0.2);
+        rgba(
+            240,
+            213,
+            138,
+            0.2
+        );
 
     border-radius: 50%;
 
     animation:
         ring 3s linear infinite;
-
 }
 
-
 .liquid {
-
     position: absolute;
 
     width: 80px;
@@ -1316,54 +1214,52 @@ button {
     border-radius: 50%;
 
     background:
-        rgba(240, 213, 138, 0.25);
+        rgba(
+            240,
+            213,
+            138,
+            0.25
+        );
 
-    filter: blur(10px);
-
+    filter:
+        blur(10px);
 }
 
-
 .lab-status {
-
     margin-top: 35px;
 
     font-size: 10px;
 
-    letter-spacing: 0.2em;
+    letter-spacing:
+        0.2em;
 
     color:
         var(--gold-light);
-
 }
-
 
 .lab-subtitle {
-
     font-size: 11px;
 
-    color: #DDD3E3;
+    color:
+        #aaa0b8;
 
     margin-top: 5px;
-
 }
 
-
 .formula-panel {
-
-    background: white;
+    background:
+        white;
 
     border:
-        1px solid var(--border);
+        1px solid
+        var(--border);
 
     border-radius: 28px;
 
     padding: 30px;
-
 }
 
-
 .panel-title {
-
     display: flex;
 
     justify-content:
@@ -1371,180 +1267,165 @@ button {
 
     font-size: 10px;
 
-    letter-spacing: 0.1em;
+    letter-spacing:
+        0.1em;
 
     font-weight: 700;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 
     padding-bottom: 20px;
 
     border-bottom:
-        1px solid var(--border);
-
+        1px solid
+        var(--border);
 }
 
-
 .selected-list {
-
     min-height: 210px;
 
     padding: 20px 0;
-
 }
 
-
 .empty-state {
-
     height: 180px;
 
     display: flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
-    text-align: center;
+    text-align:
+        center;
 
-    color: var(--muted);
-
+    color:
+        var(--muted);
 }
 
-
 .empty-state span {
-
     width: 45px;
 
     height: 45px;
 
     border:
-        1px dashed var(--gold);
+        1px dashed
+        var(--gold);
 
     border-radius: 50%;
 
     display: flex;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    align-items: center;
+    align-items:
+        center;
 
-    color: var(--gold);
+    color:
+        var(--gold);
 
     font-size: 25px;
 
     margin-bottom: 12px;
-
 }
-
 
 .empty-state p {
-
     font-size: 11px;
-
 }
 
-
 .selected-item {
-
     display: flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: space-between;
+    justify-content:
+        space-between;
 
     padding: 12px;
 
-    background: #FAF8FC;
+    background:
+        #faf8fc;
 
     border-radius: 12px;
 
     margin-bottom: 8px;
 
     font-size: 12px;
-
 }
 
-
 .selected-item button {
-
     border: none;
 
     background: none;
 
-    color: #A86B6B;
+    color:
+        #a86b6b;
 
     cursor: pointer;
 
     font-size: 10px;
-
 }
-
 
 .budget-box {
-
     border-top:
-        1px solid var(--border);
+        1px solid
+        var(--border);
 
     padding-top: 20px;
-
 }
 
-
 .budget-header {
-
     display: flex;
 
     justify-content:
         space-between;
 
-    align-items: center;
-
+    align-items:
+        center;
 }
 
-
 .small-label {
-
     display: block;
 
     font-size: 8px;
 
-    letter-spacing: 0.15em;
+    letter-spacing:
+        0.15em;
 
-    color: var(--muted);
-
+    color:
+        var(--muted);
 }
 
-
 .budget-header strong {
-
     font-family:
         "Playfair Display",
         serif;
 
     font-size: 20px;
-
 }
 
-
 .budget-track {
-
     height: 8px;
 
-    background: #EBE7ED;
+    background:
+        #ebe7ed;
 
     border-radius: 20px;
 
     margin-top: 15px;
 
     overflow: hidden;
-
 }
 
-
 .budget-fill {
-
     height: 100%;
 
     width: 0%;
@@ -1556,19 +1437,17 @@ button {
             var(--gold)
         );
 
-    transition: 0.5s ease;
-
+    transition:
+        0.5s ease;
 }
 
-
 #budgetMessage {
-
     font-size: 10px;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 
     margin-top: 8px;
-
 }
 
 
@@ -1577,12 +1456,11 @@ button {
 ========================================================= */
 
 .sustainability-card {
-
     background:
         linear-gradient(
             135deg,
-            #253C2D,
-            #41694D
+            #253c2d,
+            #41694d
         );
 
     color: white;
@@ -1590,31 +1468,24 @@ button {
     padding: 50px;
 
     border-radius: 28px;
-
 }
-
 
 .eco-icon {
-
     font-size: 45px;
 
-    color: #B9D9BD;
-
+    color:
+        #b9d9bd;
 }
-
 
 .sustainability-card
 .section-label {
-
-    color: #B9D9BD;
+    color:
+        #b9d9bd;
 
     margin-top: 15px;
-
 }
 
-
 .sustainability-card h2 {
-
     font-family:
         "Playfair Display",
         serif;
@@ -1623,67 +1494,62 @@ button {
 
     line-height: 1.1;
 
-    margin: 12px 0;
-
+    margin:
+        12px 0;
 }
 
-
-.sustainability-card >
-p:not(.section-label) {
-
-    color: #D4E3D5;
+.sustainability-card
+> p:not(.section-label) {
+    color:
+        #d4e3d5;
 
     max-width: 600px;
-
 }
 
-
 .eco-flow {
-
     display: flex;
 
-    align-items: center;
+    align-items:
+        center;
 
     gap: 15px;
 
     margin-top: 35px;
 
     flex-wrap: wrap;
-
 }
 
-
 .eco-step {
-
     background:
-        rgba(255,255,255,0.08);
+        rgba(
+            255,
+            255,
+            255,
+            0.08
+        );
 
-    padding: 16px 20px;
+    padding:
+        16px 20px;
 
     border-radius: 15px;
 
     font-size: 12px;
-
 }
 
-
 .eco-step span {
-
     display: block;
 
-    color: #B9D9BD;
+    color:
+        #b9d9bd;
 
     font-size: 9px;
 
     margin-bottom: 5px;
-
 }
 
-
 .eco-arrow {
-
-    color: #B9D9BD;
-
+    color:
+        #b9d9bd;
 }
 
 
@@ -1692,38 +1558,37 @@ p:not(.section-label) {
 ========================================================= */
 
 .activate-section {
-
     text-align: center;
 
-    padding: 100px 30px;
-
+    padding:
+        100px 30px;
 }
 
-
 .activate-section h2 {
-
     font-family:
         "Playfair Display",
         serif;
 
     font-size:
-        clamp(35px, 5vw, 55px);
+        clamp(
+            35px,
+            5vw,
+            55px
+        );
 
     line-height: 1.05;
 
-    margin: 12px 0 28px;
-
+    margin:
+        12px 0 28px;
 }
 
-
 .warning {
-
-    color: #A55757;
+    color:
+        #a55757;
 
     font-size: 12px;
 
     margin-top: 15px;
-
 }
 
 
@@ -1732,69 +1597,60 @@ p:not(.section-label) {
 ========================================================= */
 
 .result-card {
-
     background:
-
         linear-gradient(
             145deg,
-            #80699F,
-            #9A80BC
+            #211332,
+            #38205e
         );
 
     color: white;
 
     text-align: center;
 
-    padding: 60px 30px;
+    padding:
+        60px 30px;
 
     border-radius: 30px;
 
     overflow: hidden;
-
 }
 
-
 .formula-animation {
-
     height: 240px;
 
     position: relative;
 
     display: flex;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    align-items: center;
-
+    align-items:
+        center;
 }
-
 
 .formula-bottle {
-
     animation:
-        bottleReveal 1.5s ease forwards;
-
+        bottleReveal
+        1.5s ease forwards;
 }
 
-
 .bottle-cap {
-
     width: 65px;
 
     height: 25px;
 
-    background: #B28B32;
+    background:
+        #b28b32;
 
     margin: auto;
 
     border-radius:
         5px 5px 0 0;
-
 }
 
-
 .bottle-body {
-
     width: 120px;
 
     height: 150px;
@@ -1802,52 +1658,54 @@ p:not(.section-label) {
     background:
         linear-gradient(
             145deg,
-            #D8B862,
-            #A47C27
+            #d8b862,
+            #a47c27
         );
 
     border-radius:
-        10px 10px 20px 20px;
+        10px 10px
+        20px 20px;
 
     display: flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    align-items: center;
+    align-items:
+        center;
 
-    color: #4A3A59;
+    color:
+        #24172f;
 
     box-shadow:
         0 20px 60px
-        rgba(201, 166, 75, 0.35);
-
+        rgba(
+            201,
+            166,
+            75,
+            0.35
+        );
 }
 
-
 .bottle-body span {
-
     font-family:
         "Playfair Display",
         serif;
 
     font-size: 24px;
-
 }
-
 
 .bottle-body small {
-
-    letter-spacing: 0.15em;
+    letter-spacing:
+        0.15em;
 
     font-size: 7px;
-
 }
 
-
 .particle {
-
     position: absolute;
 
     width: 8px;
@@ -1860,45 +1718,37 @@ p:not(.section-label) {
         var(--gold-light);
 
     box-shadow:
-        0 0 15px var(--gold);
-
+        0 0 15px
+        var(--gold);
 }
 
-
 .particle-one {
-
     left: 35%;
 
     animation:
-        particleOne 2.5s infinite;
-
+        particleOne
+        2.5s infinite;
 }
 
-
 .particle-two {
-
     right: 35%;
 
     animation:
-        particleTwo 3s infinite;
-
+        particleTwo
+        3s infinite;
 }
 
-
 .particle-three {
-
     left: 50%;
 
     top: 20%;
 
     animation:
-        particleThree 2s infinite;
-
+        particleThree
+        2s infinite;
 }
 
-
 .result-card h2 {
-
     font-family:
         "Playfair Display",
         serif;
@@ -1907,31 +1757,28 @@ p:not(.section-label) {
         var(--gold-light);
 
     font-size: 48px;
-
 }
 
-
 .result-card > p {
-
-    color: #E4DCE9;
+    color:
+        #cfc4d9;
 
     max-width: 600px;
 
     margin:
         10px auto 25px;
-
 }
 
-
 .achievement {
-
     max-width: 400px;
 
-    margin: 30px auto;
+    margin:
+        30px auto;
 
     display: flex;
 
-    align-items: center;
+    align-items:
+        center;
 
     gap: 15px;
 
@@ -1941,18 +1788,25 @@ p:not(.section-label) {
 
     border:
         1px solid
-        rgba(240,213,138,0.3);
+        rgba(
+            240,
+            213,
+            138,
+            0.3
+        );
 
     border-radius: 18px;
 
     background:
-        rgba(255,255,255,0.04);
-
+        rgba(
+            255,
+            255,
+            255,
+            0.04
+        );
 }
 
-
 .achievement-icon {
-
     width: 50px;
 
     height: 50px;
@@ -1967,28 +1821,26 @@ p:not(.section-label) {
 
     display: flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
-
+    justify-content:
+        center;
 }
 
-
 .achievement span {
-
     display: block;
 
     font-size: 8px;
 
-    letter-spacing: 0.15em;
+    letter-spacing:
+        0.15em;
 
-    color: #C8BDCE;
-
+    color:
+        #a99cb4;
 }
 
-
 .achievement strong {
-
     display: block;
 
     color:
@@ -1999,24 +1851,31 @@ p:not(.section-label) {
         serif;
 
     font-size: 20px;
-
 }
 
-
 .result-message {
-
     max-width: 600px;
 
-    margin: 25px auto 0;
+    margin:
+        25px auto 0;
 
     text-align: left;
 
     background:
-        rgba(255,255,255,0.06);
+        rgba(
+            255,
+            255,
+            255,
+            0.06
+        );
 
     border-color:
-        rgba(255,255,255,0.1);
-
+        rgba(
+            255,
+            255,
+            255,
+            0.1
+        );
 }
 
 
@@ -2025,23 +1884,24 @@ p:not(.section-label) {
 ========================================================= */
 
 .reflection-grid {
-
     display: grid;
 
     grid-template-columns:
-        repeat(4, 1fr);
+        repeat(
+            4,
+            1fr
+        );
 
     gap: 15px;
-
 }
 
-
 .reflection-grid button {
-
-    background: white;
+    background:
+        white;
 
     border:
-        1px solid var(--border);
+        1px solid
+        var(--border);
 
     border-radius: 20px;
 
@@ -2051,26 +1911,22 @@ p:not(.section-label) {
 
     cursor: pointer;
 
-    transition: 0.3s;
+    transition:
+        0.3s;
 
-    color: var(--text);
-
+    color:
+        var(--text);
 }
 
-
 .reflection-grid button:hover {
-
     border-color:
         var(--gold);
 
     transform:
         translateY(-4px);
-
 }
 
-
 .reflection-grid span {
-
     display: block;
 
     color:
@@ -2079,37 +1935,30 @@ p:not(.section-label) {
     font-size: 28px;
 
     margin-bottom: 15px;
-
 }
 
-
 .reflection-grid strong {
-
     display: block;
 
     font-size: 13px;
-
 }
-
 
 .reflection-grid small {
-
     display: block;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 
     margin-top: 5px;
-
 }
 
-
 .reflection-result {
-
     margin-top: 20px;
 
     padding: 20px;
 
-    background: #F1ECF8;
+    background:
+        #f1edf9;
 
     border-radius: 18px;
 
@@ -2117,56 +1966,46 @@ p:not(.section-label) {
         var(--purple);
 
     font-size: 13px;
-
 }
 
-
 .complete-message {
-
     margin-top: 25px;
 
     display: flex;
 
-    align-items: center;
+    align-items:
+        center;
 
     gap: 15px;
 
-    background: #FFF;
+    background:
+        #fff;
 
     border:
-        1px solid var(--border);
+        1px solid
+        var(--border);
 
     border-radius: 20px;
 
     padding: 22px;
-
 }
 
-
 .complete-message > span {
-
     color:
         var(--gold);
 
     font-size: 25px;
-
 }
-
 
 .complete-message strong {
-
     font-size: 13px;
-
 }
 
-
 .complete-message p {
-
     color:
         var(--muted);
 
     font-size: 12px;
-
 }
 
 
@@ -2175,7 +2014,6 @@ p:not(.section-label) {
 ========================================================= */
 
 footer {
-
     background:
         var(--purple-dark);
 
@@ -2183,35 +2021,31 @@ footer {
 
     text-align: center;
 
-    padding: 45px 20px;
+    padding:
+        45px 20px;
 
     margin-top: 80px;
-
 }
 
-
 .footer-brand {
-
     color:
         var(--gold-light);
 
-    letter-spacing: 0.2em;
+    letter-spacing:
+        0.2em;
 
     font-size: 12px;
 
     font-weight: 700;
-
 }
 
-
 footer p {
-
-    color: #D0C5DB;
+    color:
+        #8f8499;
 
     font-size: 11px;
 
     margin-top: 8px;
-
 }
 
 
@@ -2221,133 +2055,102 @@ footer p {
 
 @keyframes floating {
 
-    0%, 100% {
-
+    0%,
+    100% {
         transform:
             translateY(0);
-
     }
 
     50% {
-
         transform:
             translateY(-10px);
-
     }
-
 }
-
 
 @keyframes ring {
 
     from {
-
         transform:
             rotate(0deg);
-
     }
 
     to {
-
         transform:
             rotate(360deg);
-
     }
-
 }
-
 
 @keyframes bottleReveal {
 
     0% {
-
         transform:
             scale(0.4)
             translateY(50px);
 
         opacity: 0;
-
     }
 
     100% {
-
         transform:
             scale(1)
             translateY(0);
 
         opacity: 1;
-
     }
-
 }
-
 
 @keyframes particleOne {
 
-    0%, 100% {
-
+    0%,
+    100% {
         transform:
             translateY(20px);
 
         opacity: 0;
-
     }
 
     50% {
-
         transform:
             translateY(-50px);
 
         opacity: 1;
-
     }
-
 }
-
 
 @keyframes particleTwo {
 
-    0%, 100% {
-
+    0%,
+    100% {
         transform:
             translateY(20px);
 
         opacity: 0;
-
     }
 
     50% {
-
         transform:
             translateY(-70px);
 
         opacity: 1;
-
     }
-
 }
-
 
 @keyframes particleThree {
 
-    0%, 100% {
-
+    0%,
+    100% {
         transform:
             translateY(20px);
 
         opacity: 0;
-
     }
 
     50% {
-
         transform:
             translateY(-60px);
 
         opacity: 1;
-
     }
-
 }
 
 
@@ -2359,145 +2162,115 @@ footer p {
 
     .client-grid,
     .reflection-grid {
-
         grid-template-columns:
-            repeat(2, 1fr);
-
+            repeat(
+                2,
+                1fr
+            );
     }
-
 
     .ingredient-grid {
-
         grid-template-columns:
-            repeat(2, 1fr);
-
+            repeat(
+                2,
+                1fr
+            );
     }
-
 
     .formulation-layout {
-
-        grid-template-columns: 1fr;
-
+        grid-template-columns:
+            1fr;
     }
 
+    /*
+    Ingredient card kekal panjang
+    pada tablet
+    */
+
+    .ingredient,
+    .ingredient-inner {
+        min-height: 330px;
+    }
 }
 
 
 @media (max-width: 600px) {
 
     .topbar {
-
         padding:
             0 20px;
-
     }
-
 
     .mission-progress {
-
         display: none;
-
     }
-
 
     .section {
-
         padding:
             55px 18px 10px;
-
     }
-
 
     .mission-card {
-
         padding:
             35px 25px;
-
     }
-
 
     .client-grid,
     .ingredient-grid,
     .reflection-grid {
-
-        grid-template-columns: 1fr;
-
+        grid-template-columns:
+            1fr;
     }
 
+    /*
+    Mobile ingredient card
+    sedikit lebih tinggi supaya
+    clue panjang masih selesa
+    */
 
-    /* =====================================
-       MOBILE INGREDIENT CARD
-       Keep extended clue height
-    ===================================== */
-
-    .ingredient {
-
-        min-height: 365px;
-
-    }
-
-
+    .ingredient,
     .ingredient-inner {
-
-        min-height: 365px;
-
+        min-height: 350px;
     }
-
 
     .ingredient-back {
-
-        padding: 25px;
-
+        padding:
+            30px 25px;
     }
-
 
     .ingredient-back p {
+        font-size: 13px;
 
-        font-size: 12px;
+        line-height: 1.65;
 
-        line-height: 1.6;
-
+        margin-bottom: 14px;
     }
-
 
     .sustainability-card {
-
         padding:
             35px 25px;
-
     }
-
 
     .sustainability-card h2 {
-
         font-size: 34px;
-
     }
-
 
     .eco-flow {
+        flex-direction:
+            column;
 
-        flex-direction: column;
-
-        align-items: stretch;
-
+        align-items:
+            stretch;
     }
 
-
     .eco-arrow {
-
         text-align: center;
 
         transform:
             rotate(90deg);
-
     }
-
 
     .landing h1 {
-
         font-size: 48px;
-
     }
-
 }
