@@ -1,21 +1,10 @@
-/* =========================================
-   AURA FORMULATION QUEST
-   MISSION 01
-========================================= */
-
-
-/* =========================================
-   INGREDIENT DATABASE
-========================================= */
-
 const ingredients = [
-
     {
         id: "almond",
         name: "Sweet Almond Oil",
         icon: "🌰",
         cost: 3.00,
-        clue: "I am a lightweight botanical oil commonly used as a carrier oil.",
+        clue: "A lightweight botanical carrier oil commonly used in cosmetic formulations.",
         role: "Carrier Oil"
     },
 
@@ -24,7 +13,7 @@ const ingredients = [
         name: "Hibiscus Oil",
         icon: "🌺",
         cost: 3.50,
-        clue: "I bring a botanical character to a premium nail-care concept.",
+        clue: "A botanical oil that can contribute to a premium botanical beauty concept.",
         role: "Botanical Oil"
     },
 
@@ -33,16 +22,16 @@ const ingredients = [
         name: "Gromwell Root",
         icon: "🌿",
         cost: 2.50,
-        clue: "I come from a botanical root and can contribute to a plant-based beauty concept.",
+        clue: "A botanical root ingredient that supports a plant-based cosmetic concept.",
         role: "Botanical Ingredient"
     },
 
     {
         id: "tamarind",
         name: "Tamarind Seed Extract",
-        icon: "♻",
+        icon: "♻️",
         cost: 1.50,
-        clue: "I give a discarded material a second life through upcycling.",
+        clue: "An upcycled ingredient that gives a discarded material a second life.",
         role: "Upcycled Ingredient"
     },
 
@@ -51,7 +40,7 @@ const ingredients = [
         name: "Vitamin E",
         icon: "✨",
         cost: 2.00,
-        clue: "I am commonly associated with supporting the stability of oil-based cosmetic formulations.",
+        clue: "An ingredient commonly associated with supporting the stability of oil-based cosmetic formulations.",
         role: "Antioxidant"
     },
 
@@ -60,7 +49,7 @@ const ingredients = [
         name: "Rose Geranium",
         icon: "🌹",
         cost: 4.00,
-        clue: "I contribute to the sensory and aromatic experience of a formulation.",
+        clue: "An aromatic botanical ingredient that contributes to the sensory experience of a formulation.",
         role: "Essential Oil"
     },
 
@@ -69,51 +58,15 @@ const ingredients = [
         name: "Vanilla",
         icon: "🍦",
         cost: 3.00,
-        clue: "I contribute a warm and comforting aromatic character.",
+        clue: "A warm aromatic note that can contribute to the sensory identity of a cosmetic product.",
         role: "Fragrance Note"
     }
-
 ];
 
 
-/* =========================================
-   VARIABLES
-========================================= */
-
 let selectedIngredients = [];
 
-let selectedClient = "";
-
 const budget = 20;
-
-
-/* =========================================
-   PAGE ELEMENTS
-========================================= */
-
-const ingredientContainer =
-    document.getElementById("ingredients");
-
-const selectedList =
-    document.getElementById("selectedList");
-
-const budgetText =
-    document.getElementById("budgetText");
-
-const budgetFill =
-    document.getElementById("fill");
-
-const budgetMessage =
-    document.getElementById("budgetMessage");
-
-const ingredientCount =
-    document.getElementById("ingredientCount");
-
-const missionProgress =
-    document.getElementById("missionProgress");
-
-const progressText =
-    document.getElementById("progressText");
 
 
 /* =========================================
@@ -122,7 +75,14 @@ const progressText =
 
 function createIngredientCards() {
 
-    ingredientContainer.innerHTML = "";
+    const container = document.getElementById("ingredients");
+
+    if (!container) {
+        console.error("Ingredient container not found.");
+        return;
+    }
+
+    container.innerHTML = "";
 
     ingredients.forEach((ingredient, index) => {
 
@@ -135,6 +95,8 @@ function createIngredientCards() {
         card.innerHTML = `
 
             <div class="ingredient-inner">
+
+                <!-- FRONT -->
 
                 <div class="ingredient-front">
 
@@ -151,11 +113,13 @@ function createIngredientCards() {
                     </h3>
 
                     <p>
-                        Click to discover
+                        Tap to Discover
                     </p>
 
                 </div>
 
+
+                <!-- BACK -->
 
                 <div class="ingredient-back">
 
@@ -171,7 +135,13 @@ function createIngredientCards() {
                         ${ingredient.clue}
                     </p>
 
+                    <p>
+                        <strong>Role:</strong>
+                        ${ingredient.role}
+                    </p>
+
                     <button
+                        type="button"
                         class="add-button"
                         onclick="addIngredient('${ingredient.id}', event)">
                         + Add to Formula
@@ -180,89 +150,32 @@ function createIngredientCards() {
                 </div>
 
             </div>
-
         `;
 
 
-        card.addEventListener("click", function () {
+        /*
+        =========================================
+        TAP / CLICK TO DISCOVER
+        =========================================
+        */
+
+        card.addEventListener("click", function(event) {
+
+            // Jangan flip semula apabila tekan Add to Formula
+            if (
+                event.target.classList.contains("add-button")
+            ) {
+                return;
+            }
 
             card.classList.toggle("flipped");
 
         });
 
 
-        ingredientContainer.appendChild(card);
+        container.appendChild(card);
 
     });
-
-}
-
-
-/* =========================================
-   START MISSION
-========================================= */
-
-function startMission() {
-
-    document.getElementById("landing")
-        .classList.add("hidden");
-
-    document.getElementById("game")
-        .classList.remove("hidden");
-
-    updateProgress(10);
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-
-}
-
-
-/* =========================================
-   SELECT CLIENT
-========================================= */
-
-function selectClient(element, clientName) {
-
-    document
-        .querySelectorAll(".client-card")
-        .forEach(card => {
-
-            card.classList.remove("selected");
-
-        });
-
-
-    element.classList.add("selected");
-
-    selectedClient = clientName;
-
-
-    const result =
-        document.getElementById("clientResult");
-
-
-    result.classList.remove("hidden");
-
-
-    result.innerHTML = `
-
-        <strong>✦ Aura Study Buddy</strong>
-
-        <br>
-
-        Excellent choice.
-
-        Your formulation should now consider:
-
-        <strong>${clientName}</strong>.
-
-    `;
-
-
-    updateProgress(25);
 
 }
 
@@ -273,12 +186,12 @@ function selectClient(element, clientName) {
 
 function addIngredient(id, event) {
 
-    event.stopPropagation();
-
+    if (event) {
+        event.stopPropagation();
+    }
 
     const ingredient =
         ingredients.find(item => item.id === id);
-
 
     if (!ingredient) {
         return;
@@ -286,14 +199,14 @@ function addIngredient(id, event) {
 
 
     const alreadyAdded =
-        selectedIngredients.some(item => item.id === id);
+        selectedIngredients.some(
+            item => item.id === id
+        );
 
 
     if (alreadyAdded) {
 
-        showTemporaryMessage(
-            "This ingredient is already in your formula."
-        );
+        alert("This ingredient is already in your formula.");
 
         return;
 
@@ -304,10 +217,12 @@ function addIngredient(id, event) {
         calculateTotal();
 
 
-    if (currentTotal + ingredient.cost > budget) {
+    if (
+        currentTotal + ingredient.cost > budget
+    ) {
 
-        showTemporaryMessage(
-            "Your formulation budget would be exceeded. Try another ingredient."
+        alert(
+            "This ingredient would exceed your RM20 formulation budget."
         );
 
         return;
@@ -332,57 +247,22 @@ function addIngredient(id, event) {
     updateFormula();
 
 
+    /*
+    =========================================
+    SUSTAINABILITY
+    =========================================
+    */
+
     if (id === "tamarind") {
 
-        document
-            .getElementById("sustainabilityCard")
-            .classList.remove("hidden");
+        const sustainability =
+            document.getElementById(
+                "sustainabilityCard"
+            );
 
-    }
-
-
-    updateProgress(55);
-
-}
-
-
-/* =========================================
-   REMOVE INGREDIENT
-========================================= */
-
-function removeIngredient(id) {
-
-    selectedIngredients =
-        selectedIngredients.filter(
-            ingredient => ingredient.id !== id
-        );
-
-
-    const card =
-        document.querySelector(
-            `.ingredient[data-id="${id}"]`
-        );
-
-
-    if (card) {
-        card.classList.remove("used");
-    }
-
-
-    updateFormula();
-
-
-    const hasTamarind =
-        selectedIngredients.some(
-            ingredient => ingredient.id === "tamarind"
-        );
-
-
-    if (!hasTamarind) {
-
-        document
-            .getElementById("sustainabilityCard")
-            .classList.add("hidden");
+        if (sustainability) {
+            sustainability.classList.remove("hidden");
+        }
 
     }
 
@@ -401,7 +281,6 @@ function calculateTotal() {
             return total + ingredient.cost;
 
         },
-
         0
     );
 
@@ -414,34 +293,69 @@ function calculateTotal() {
 
 function updateFormula() {
 
+    const selectedList =
+        document.getElementById("selectedList");
+
+    const ingredientCount =
+        document.getElementById("ingredientCount");
+
+    const budgetText =
+        document.getElementById("budgetText");
+
+    const budgetFill =
+        document.getElementById("fill");
+
+    const budgetMessage =
+        document.getElementById("budgetMessage");
+
+
     const total =
         calculateTotal();
 
 
-    ingredientCount.textContent =
-        `${selectedIngredients.length} ingredient${selectedIngredients.length === 1 ? "" : "s"}`;
+    /*
+    INGREDIENT COUNT
+    */
 
+    if (ingredientCount) {
 
-    budgetText.textContent =
-        `RM${total.toFixed(2)}`;
-
-
-    const percentage =
-        Math.min((total / budget) * 100, 100);
-
-
-    budgetFill.style.width =
-        `${percentage}%`;
-
-
-    if (total === 0) {
-
-        budgetMessage.textContent =
-            "You have RM20.00 remaining.";
+        ingredientCount.textContent =
+            `${selectedIngredients.length} ingredient${
+                selectedIngredients.length === 1
+                    ? ""
+                    : "s"
+            }`;
 
     }
 
-    else if (total < budget) {
+
+    /*
+    BUDGET
+    */
+
+    if (budgetText) {
+
+        budgetText.textContent =
+            `RM${total.toFixed(2)}`;
+
+    }
+
+
+    if (budgetFill) {
+
+        const percentage =
+            Math.min(
+                (total / budget) * 100,
+                100
+            );
+
+        budgetFill.style.width =
+            `${percentage}%`;
+
+    }
+
+
+    if (budgetMessage) {
 
         const remaining =
             budget - total;
@@ -451,11 +365,13 @@ function updateFormula() {
 
     }
 
-    else {
 
-        budgetMessage.textContent =
-            "Your budget is fully allocated.";
+    /*
+    SELECTED INGREDIENT LIST
+    */
 
+    if (!selectedList) {
+        return;
     }
 
 
@@ -484,345 +400,99 @@ function updateFormula() {
     selectedList.innerHTML = "";
 
 
-    selectedIngredients.forEach(ingredient => {
+    selectedIngredients.forEach(
+        ingredient => {
 
-        const item =
-            document.createElement("div");
+            const item =
+                document.createElement("div");
 
-
-        item.className =
-            "selected-item";
-
-
-        item.innerHTML = `
-
-            <span>
-                ${ingredient.icon}
-                ${ingredient.name}
-            </span>
-
-            <span>
-
-                RM${ingredient.cost.toFixed(2)}
-
-                <button
-                    onclick="removeIngredient('${ingredient.id}')">
-                    REMOVE
-                </button>
-
-            </span>
-
-        `;
+            item.className =
+                "selected-item";
 
 
-        selectedList.appendChild(item);
+            item.innerHTML = `
 
-    });
+                <span>
+                    ${ingredient.icon}
+                    ${ingredient.name}
+                </span>
+
+                <span>
+                    RM${ingredient.cost.toFixed(2)}
+
+                    <button
+                        type="button"
+                        onclick="removeIngredient('${ingredient.id}')">
+                        REMOVE
+                    </button>
+                </span>
+
+            `;
 
 
-    updateBeaker();
+            selectedList.appendChild(item);
+
+        }
+    );
 
 }
 
 
 /* =========================================
-   UPDATE BEAKER
+   REMOVE INGREDIENT
 ========================================= */
 
-function updateBeaker() {
+function removeIngredient(id) {
 
-    const beaker =
-        document.getElementById("beaker");
-
-
-    const count =
-        selectedIngredients.length;
-
-
-    if (count === 0) {
-
-        beaker.style.boxShadow =
-            "0 0 40px rgba(117, 84, 173, 0.7)";
-
-    }
-
-    else if (count <= 2) {
-
-        beaker.style.boxShadow =
-            "0 0 50px rgba(201, 166, 75, 0.5)";
-
-    }
-
-    else {
-
-        beaker.style.boxShadow =
-            "0 0 80px rgba(117, 84, 173, 0.9)";
-
-    }
-
-}
+    selectedIngredients =
+        selectedIngredients.filter(
+            ingredient =>
+                ingredient.id !== id
+        );
 
 
-/* =========================================
-   ACTIVATE FORMULATION
-========================================= */
-
-function activateFormula() {
-
-    const warning =
-        document.getElementById("activationWarning");
+    const card =
+        document.querySelector(
+            `.ingredient[data-id="${id}"]`
+        );
 
 
-    if (selectedClient === "") {
-
-        warning.textContent =
-            "Please select a client profile first.";
-
-        return;
-
+    if (card) {
+        card.classList.remove("used");
     }
 
 
-    if (selectedIngredients.length < 2) {
-
-        warning.textContent =
-            "Please discover and select at least 2 ingredients.";
-
-        return;
-
-    }
+    updateFormula();
 
 
-    const total =
-        calculateTotal();
-
-
-    if (total > budget) {
-
-        warning.textContent =
-            "Your formulation is over budget.";
-
-        return;
-
-    }
-
-
-    warning.textContent = "";
-
-
-    const resultCard =
-        document.getElementById("resultCard");
-
-
-    const reflection =
-        document.getElementById("reflection");
-
+    /*
+    Hide sustainability card
+    if Tamarind is removed
+    */
 
     const hasTamarind =
         selectedIngredients.some(
-            ingredient => ingredient.id === "tamarind"
+            ingredient =>
+                ingredient.id === "tamarind"
         );
 
 
-    const hasGeranium =
-        selectedIngredients.some(
-            ingredient => ingredient.id === "geranium"
-        );
+    if (!hasTamarind) {
 
+        const sustainability =
+            document.getElementById(
+                "sustainabilityCard"
+            );
 
-    const hasGromwell =
-        selectedIngredients.some(
-            ingredient => ingredient.id === "gromwell"
-        );
+        if (sustainability) {
 
+            sustainability.classList.add(
+                "hidden"
+            );
 
-    let identityTitle;
-
-    let identityText;
-
-    let auraMessage;
-
-
-    if (hasTamarind) {
-
-        identityTitle =
-            "Green Innovator";
-
-        identityText =
-            "You prioritised sustainability while building a botanical formulation.";
-
-        auraMessage =
-            "You identified an opportunity to connect cosmetic innovation with upcycling. That's strong sustainability thinking!";
+        }
 
     }
-
-    else if (
-        hasGeranium &&
-        selectedClient === "Luxury Botanical"
-    ) {
-
-        identityTitle =
-            "Botanical Formulator";
-
-        identityText =
-            "You created a formulation direction focused on botanical character and premium sensory experience.";
-
-        auraMessage =
-            "Your choices show strong awareness of the sensory side of cosmetic product development.";
-
-    }
-
-    else if (hasGromwell) {
-
-        identityTitle =
-            "Creative Formulator";
-
-        identityText =
-            "You explored botanical ingredients to create a distinctive formulation concept.";
-
-        auraMessage =
-            "Creative formulation starts with curiosity. You explored your ingredients thoughtfully.";
-
-    }
-
-    else {
-
-        identityTitle =
-            "Client-Centred Formulator";
-
-        identityText =
-            "You focused on creating a formulation that responds to the needs of your chosen client.";
-
-        auraMessage =
-            "You kept your client's needs at the centre of your formulation decisions. Excellent!";
-
-    }
-
-
-    document.getElementById("identityTitle")
-        .textContent = identityTitle;
-
-
-    document.getElementById("identityText")
-        .textContent = identityText;
-
-
-    document.getElementById("badgeName")
-        .textContent = identityTitle;
-
-
-    document.getElementById("auraResultMessage")
-        .textContent = auraMessage;
-
-
-    resultCard.classList.remove("hidden");
-
-
-    reflection.classList.remove("hidden");
-
-
-    updateProgress(80);
-
-
-    setTimeout(() => {
-
-        resultCard.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        });
-
-    }, 200);
-
-}
-
-
-/* =========================================
-   REFLECTION
-========================================= */
-
-function reflect(choice) {
-
-    const reflectionText =
-        document.getElementById("reflectionText");
-
-
-    reflectionText.classList.remove("hidden");
-
-
-    reflectionText.innerHTML = `
-
-        <strong>✦ Aura Study Buddy</strong>
-
-        <br><br>
-
-        Excellent reflection.
-
-        Your second iteration focuses on:
-
-        <strong>${choice}</strong>.
-
-        <br><br>
-
-        Remember:
-
-        great formulation is not about getting
-        everything right on the first attempt.
-
-        It is about making informed decisions,
-        evaluating the result and improving it.
-
-    `;
-
-
-    updateProgress(100);
-
-
-    setTimeout(() => {
-
-        reflectionText.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        });
-
-    }, 100);
-
-}
-
-
-/* =========================================
-   PROGRESS
-========================================= */
-
-function updateProgress(value) {
-
-    missionProgress.style.width =
-        `${value}%`;
-
-    progressText.textContent =
-        `${value}%`;
-
-}
-
-
-/* =========================================
-   TEMPORARY MESSAGE
-========================================= */
-
-function showTemporaryMessage(message) {
-
-    const warning =
-        document.getElementById("activationWarning");
-
-
-    warning.textContent =
-        message;
-
-
-    setTimeout(() => {
-
-        warning.textContent = "";
-
-    }, 3000);
 
 }
 
@@ -831,6 +501,11 @@ function showTemporaryMessage(message) {
    INITIALISE
 ========================================= */
 
-createIngredientCards();
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
 
-updateProgress(0);
+        createIngredientCards();
+
+    }
+);
